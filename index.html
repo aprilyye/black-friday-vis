@@ -2,4 +2,14 @@
   <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 <body>
+  <script>
+    var blackFridayData;
+    d3.csv("BlackFriday.csv").then(function(data) {
+      blackFridayData = data;
+      console.log("data =", blackFridayData); // confirm data is successfully loaded
+    })
+    .catch((err) => {
+      throw new Error("Something went wrong", err);
+    });
+  </script>
 </body>
