@@ -57,18 +57,30 @@
 
       });
 
+      // calculating percentages
+      var f0to17Percent = (f0to17/females).toFixed(2);
+      var f18to25Percent = (f18to25/females).toFixed(2);
+      var f26to35Percent = (f26to35/females).toFixed(2);
+      var f36to45Percent = (f36to45/females).toFixed(2);
+
+      var m0to17Percent = (m0to17/males).toFixed(2);
+      var m18to25Percent = (m18to25/males).toFixed(2);
+      var m26to35Percent = (m26to35/males).toFixed(2);
+      var m36to45Percent = (m36to45/males).toFixed(2);
+
+
       // outputting results
       console.log("females =", females);
-      console.log("females17 =", f0to17, f0to17Purchase);
-      console.log("females18 =", f18to25, f18to25Purchase);
-      console.log("females26 =", f26to35, f26to35Purchase);
-      console.log("females36 =", f36to45, f36to45Purchase);
+      console.log("females17 =", f0to17, f0to17Percent, f0to17Purchase);
+      console.log("females18 =", f18to25, f18to25Percent, f18to25Purchase);
+      console.log("females26 =", f26to35, f26to35Percent, f26to35Purchase);
+      console.log("females36 =", f36to45, f36to45Percent, f36to45Purchase);
 
       console.log("males =", males);
-      console.log("males17 =", m0to17, m0to17Purchase);
-      console.log("males18 =", m18to25, m18to25Purchase);
-      console.log("males26 =", m26to35, m26to35Purchase);
-      console.log("males36 =", m36to45, m36to45Purchase);
+      console.log("males17 =", m0to17, m0to17Percent, m0to17Purchase);
+      console.log("males18 =", m18to25, m18to25Percent, m18to25Purchase);
+      console.log("males26 =", m26to35, m26to35Percent, m26to35Purchase);
+      console.log("males36 =", m36to45, m36to45Percent, m36to45Purchase);
 
 
     })
