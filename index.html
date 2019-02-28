@@ -4,23 +4,65 @@
 <head>
   <meta charset="UTF-8">
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style>
+    body {
+      font-family: "Open Sans", sans-serif;
+      font-size: 14px;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 20px;
+      text-align: center;
+      margin-top: 40px
+    }
+
+    #authors {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    div {
+      margin: 30px;
+    }
+
+    .description {
+      width: 650px;
+      margin: auto;
+      margin-top: 50px;
+      text-align: center;
+      border: solid 1px;
+      padding: 30px;
+
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Kenny Zhou (kz68), April Ye (yy459), Kelly Yu - Project 1</h1>
+  <h1>Black Friday Consumer Trends </h1>
+  <p id="authors">Kenny Zhou (kz68), April Ye (yy459), Kelly Yu (ky356) </p>
+  <div class="description">
+    The visualization below illustrates the behaviors of consumers on Black Friday
+    in a retail store. It compares the consumer trends between different age
+    groups and genders by analyzing the amount spent on purchases on this popular
+    shopping day in the United States.
+  </div>
   <script>
     var blackFridayData;
-    d3.csv("BlackFriday.csv").then(function(data) {
+    d3.csv("BlackFriday.csv").then(function (data) {
       blackFridayData = data;
       console.log("data =", blackFridayData); // confirm data is successfully loaded
 
       var females = males = 0;
       // females age group counters initialized
-      var f0to17 = f18to25 = f26to35 = f36to45 = 0;
-      var f0to17Purchase = f18to25Purchase = f26to35Purchase = f36to45Purchase = 0;
+      var f0to17 = f18to25 = f26to35 = f36to45 = f46to50 = f51to55 = f55andup = 0;
+      var f0to17Purchase = f18to25Purchase = f26to35Purchase = f36to45Purchase
+        = f46to50Purchase = f51to55Purchase = f55andupPurchase = 0;
       // male age group counters initialized
-      var m0to17 = m18to25 = m26to35 = m36to45 = 0;
-      var m0to17Purchase = m18to25Purchase = m26to35Purchase = m36to45Purchase = 0;
+      var m0to17 = m18to25 = m26to35 = m36to45 = m46to50 = m51to55 = m55andup = 0;
+      var m0to17Purchase = m18to25Purchase = m26to35Purchase = m36to45Purchase
+        = m46to50Purchase = m51to55Purchase = m55andupPurchase = 0;
       blackFridayData.forEach(d => {
         if (d['Gender'] == "F") {
           females++;
@@ -36,6 +78,15 @@
           } else if (d['Age'] == "36-45") {
             f36to45++;
             f36to45Purchase += parseInt(d['Purchase']);
+          } else if (d['Age'] == "46-50") {
+            f46to50++;
+            f46to50Purchase += parseInt(d['Purchase']);
+          } else if (d['Age'] == "51-55") {
+            f51to55++;
+            f51to55Purchase += parseInt(d['Purchase']);
+          } else if (d['Age'] == "55+") {
+            f55andup++;
+            f55andupPurchase += parseInt(d['Purchase']);
           }
         } else if (d['Gender'] == "M") {
           males++;
@@ -51,21 +102,36 @@
           } else if (d['Age'] == "36-45") {
             m36to45++;
             m36to45Purchase += parseInt(d['Purchase']);
+          } else if (d['Age'] == "46-50") {
+            m46to50++;
+            m46to50Purchase += parseInt(d['Purchase']);
+          } else if (d['Age'] == "51-55") {
+            m51to55++;
+            m51to55Purchase += parseInt(d['Purchase']);
+          } else if (d['Age'] == "55+") {
+            m55andup++;
+            m55andupPurchase += parseInt(d['Purchase']);
           }
         }
 
       });
 
       // calculating percentages
-      var f0to17Percent = (f0to17/females).toFixed(2);
-      var f18to25Percent = (f18to25/females).toFixed(2);
-      var f26to35Percent = (f26to35/females).toFixed(2);
-      var f36to45Percent = (f36to45/females).toFixed(2);
+      var f0to17Percent = (f0to17 / females).toFixed(2);
+      var f18to25Percent = (f18to25 / females).toFixed(2);
+      var f26to35Percent = (f26to35 / females).toFixed(2);
+      var f36to45Percent = (f36to45 / females).toFixed(2);
+      var f46to50Percent = (f46to50 / females).toFixed(2);
+      var f51to55Percent = (f51to55 / females).toFixed(2);
+      var f55andupPercent = (f55andup / females).toFixed(2);
 
-      var m0to17Percent = (m0to17/males).toFixed(2);
-      var m18to25Percent = (m18to25/males).toFixed(2);
-      var m26to35Percent = (m26to35/males).toFixed(2);
-      var m36to45Percent = (m36to45/males).toFixed(2);
+      var m0to17Percent = (m0to17 / males).toFixed(2);
+      var m18to25Percent = (m18to25 / males).toFixed(2);
+      var m26to35Percent = (m26to35 / males).toFixed(2);
+      var m36to45Percent = (m36to45 / males).toFixed(2);
+      var m46to50Percent = (m46to50 / males).toFixed(2);
+      var m51to55Percent = (m51to55 / males).toFixed(2);
+      var m55andupPercent = (m55andup / males).toFixed(2);
 
 
       // outputting results
@@ -74,17 +140,23 @@
       console.log("females18 =", f18to25, f18to25Percent, f18to25Purchase);
       console.log("females26 =", f26to35, f26to35Percent, f26to35Purchase);
       console.log("females36 =", f36to45, f36to45Percent, f36to45Purchase);
+      console.log("females46 =", f46to50, f46to50Percent, f46to50Purchase);
+      console.log("females51 =", f51to55, f51to55Percent, f51to55Purchase);
+      console.log("females55 =", f55andup, f55andupPercent, f55andupPurchase);
 
       console.log("males =", males);
       console.log("males17 =", m0to17, m0to17Percent, m0to17Purchase);
       console.log("males18 =", m18to25, m18to25Percent, m18to25Purchase);
       console.log("males26 =", m26to35, m26to35Percent, m26to35Purchase);
       console.log("males36 =", m36to45, m36to45Percent, m36to45Purchase);
+      console.log("males46 =", m46to50, m46to50Percent, m46to50Purchase);
+      console.log("males51 =", m51to55, m51to55Percent, m51to55Purchase);
+      console.log("males55 =", m55andup, m55andupPercent, m55andupPurchase);
 
     })
-    .catch((err) => {
-      throw new Error("Something went wrong", err);
-    });
+      .catch((err) => {
+        throw new Error("Something went wrong", err);
+      });
   </script>
 </body>
 
