@@ -51,6 +51,34 @@
   <p>
     <svg width="800" height="500" id="vis1">
     </svg>
+
+  <svg width="157px" height="279px" viewBox="0 0 157 279" id="pplgirl">
+      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Artboard" transform="translate(-441.000000, -40.000000)" fill="#C17474">
+              <ellipse id="Oval" cx="518" cy="111.5" rx="38" ry="38.5"></ellipse>
+              <polygon id="Triangle" points="518 112 586 275 450 275"></polygon>
+              <rect id="Rectangle-2" x="484" y="253" width="28" height="66" rx="14"></rect>
+              <rect id="Rectangle-2" x="526" y="253" width="28" height="66" rx="14"></rect>
+              <rect id="Rectangle-3" transform="translate(558.340014, 183.513331) rotate(30.000000) translate(-558.340014, -183.513331) " x="515.340014" y="172.013331" width="86" height="23" rx="11.5"></rect>
+              <rect id="Rectangle-3" transform="translate(479.989092, 181.513331) rotate(-30.000000) translate(-479.989092, -181.513331) " x="436.989092" y="170.013331" width="86" height="23" rx="11.5"></rect>
+              <polygon id="Star" points="516.5 133.75 477.412281 153.063562 484.877371 112.156781 453.254742 83.1864379 480.964945 62.9292858 516.5 40 550.848928 62.9292858 579.745258 83.1864379 548.122629 112.156781 555.587719 153.063562"></polygon>
+          </g>
+      </g>
+  </svg>
+
+  <svg width="157px" height="246px" viewBox="0 0 157 246" id="pplboy">
+      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Artboard" transform="translate(-189.000000, -73.000000)" fill="#C17474">
+              <rect id="Rectangle" x="222" y="149" width="86" height="126"></rect>
+              <ellipse id="Oval" cx="265" cy="111.5" rx="38" ry="38.5"></ellipse>
+              <rect id="Rectangle-2" x="230" y="253" width="28" height="66" rx="14"></rect>
+              <rect id="Rectangle-2" x="272" y="253" width="28" height="66" rx="14"></rect>
+              <rect id="Rectangle-3" transform="translate(306.340014, 180.513331) rotate(30.000000) translate(-306.340014, -180.513331) " x="263.340014" y="169.013331" width="86" height="23" rx="11.5"></rect>
+              <rect id="Rectangle-3" transform="translate(227.989092, 178.513331) rotate(-30.000000) translate(-227.989092, -178.513331) " x="184.989092" y="167.013331" width="86" height="23" rx="11.5"></rect>
+          </g>
+      </g>
+  </svg>
+
   </p>
   <script>
     var blackFridayData1;
@@ -160,7 +188,7 @@
         console.log("males51 =", m51to55, m51to55Percent, m51to55Purchase);
         console.log("males55 =", m55andup, m55andupPercent, m55andupPurchase);
 
-        // Building the grouped bar graph 
+        // Building the grouped bar graph
         // svg backbone
         let svg = d3.select("svg#vis1");
         let width = svg.attr("width");
@@ -168,6 +196,15 @@
         let margin = { top: 50, right: 50, bottom: 50, left: 50 };
         let chartWidth = width - margin.left - margin.right;
         let chartHeight = height - margin.top - margin.bottom;
+
+        let svgGirl = d3.select("#pplgirl");
+        var g2 = svgGirl.append("g")
+          .attr("transform", "translate(50, 10)");
+
+        let svgBoy = d3.select("#pplboy");
+        var g3 = svgBoy.append("g")
+          .attr("transform", "translate(150, 10)");
+
 
         // // Scales
         // let ageGroupScale = d3.scalePoint()
