@@ -67,20 +67,22 @@
               </g>
           </g>
       </g>
-  </svg>
+    </svg>
 
-  <svg width="157px" height="246px" viewBox="0 0 157 246" id="pplboy">
+    <svg width="157px" height="246px" viewBox="0 0 157 246" id="pplboy">
       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g id="Artboard" transform="translate(-189.000000, -73.000000)" fill="#C17474">
-              <rect id="Rectangle" x="222" y="149" width="86" height="126"></rect>
-              <ellipse id="Oval" cx="265" cy="111.5" rx="38" ry="38.5"></ellipse>
-              <rect id="Rectangle-2" x="230" y="253" width="28" height="66" rx="14"></rect>
-              <rect id="Rectangle-2" x="272" y="253" width="28" height="66" rx="14"></rect>
-              <rect id="Rectangle-3" transform="translate(306.340014, 180.513331) rotate(30.000000) translate(-306.340014, -180.513331) " x="263.340014" y="169.013331" width="86" height="23" rx="11.5"></rect>
-              <rect id="Rectangle-3" transform="translate(227.989092, 178.513331) rotate(-30.000000) translate(-227.989092, -178.513331) " x="184.989092" y="167.013331" width="86" height="23" rx="11.5"></rect>
-          </g>
+        <g id="Artboard" transform="translate(-189.000000, -73.000000)" fill="#C17474">
+          <rect id="Rectangle" x="222" y="149" width="86" height="126"></rect>
+          <ellipse id="Oval" cx="265" cy="111.5" rx="38" ry="38.5"></ellipse>
+          <rect id="Rectangle-2" x="230" y="253" width="28" height="66" rx="14"></rect>
+          <rect id="Rectangle-2" x="272" y="253" width="28" height="66" rx="14"></rect>
+          <rect id="Rectangle-3" transform="translate(306.340014, 180.513331) rotate(30.000000) translate(-306.340014, -180.513331) "
+            x="263.340014" y="169.013331" width="86" height="23" rx="11.5"></rect>
+          <rect id="Rectangle-3" transform="translate(227.989092, 178.513331) rotate(-30.000000) translate(-227.989092, -178.513331) "
+            x="184.989092" y="167.013331" width="86" height="23" rx="11.5"></rect>
+        </g>
       </g>
-  </svg>
+    </svg>
 
   <svg width="156px" height="258px" viewBox="0 0 156 258" id="pplboy2">
       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -207,7 +209,7 @@
         console.log("males51 =", m51to55, m51to55Percent, m51to55Purchase);
         console.log("males55 =", m55andup, m55andupPercent, m55andupPurchase);
 
-        // Building the grouped bar graph
+        // APRILS PART
         // svg backbone
         let svg = d3.select("svg#vis1");
         let width = svg.attr("width");
@@ -228,7 +230,7 @@
         var g4 = svgBoy2.append("g")
           .attr("transform", "translate(250, 10)");
 
-
+        // KELLYS PART
 
         // // Scales
         // let ageGroupScale = d3.scalePoint()
@@ -257,6 +259,7 @@
         //   .call(yAxis)
         //   .style("font-size", "8");
 
+        // KENNY'S PART
       })
     })
       .catch((err) => {
