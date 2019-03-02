@@ -8,6 +8,8 @@
     body {
       font-family: "Open Sans", sans-serif;
       font-size: 14px;
+      color: white;
+      background-color: #141619;
     }
 
     h1 {
@@ -60,26 +62,13 @@
   </div>
   <p>
     <!-- girl svg -->
-    <!-- <svg width="200px" height="268px" viewBox="0 0 156 268" id="pplgirl">
+    <svg width="400px" height="536px" viewBox="0 0 156 268" id="pplgirl">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path
-          d="M23.4085737,57.5528923 C27.4855021,57.5528923 36.0329005,57.364705 42.7104511,49.0840613 C48.1730492,42.3100463 52.0455584,30.9361408 54.0264855,28.8393648 C57.4968188,25.166079 81,34.3379489 81,29.1813797 C81,17.4832267 67.2813195,0.125837351 54.0264855,0.125837351 C40.7716515,0.125837351 28.1392098,8.80580904 28.1392098,20.503962 C28.1392098,24.9201247 31.439328,42.5163424 28.1392098,45.3745369 C21.0384739,51.5244028 15.1575641,57.5528923 23.4085737,57.5528923 Z"
-          fill="#D8D8D8"></path>
-        <path
-          d="M81.1212408,74 C116.483472,132.596679 135.650022,174.392624 138.620892,199.387835 C142.809005,234.624229 21.1872481,233.371049 23.6215894,199.387835 C25.4867643,173.350141 44.6533147,131.554196 81.1212408,74 Z"
-          id="Triangle" fill="#C17474"></path>
       </g>
-    </svg> -->
-    <!-- guy svg -->
     </svg>
     <!-- guy svg -->
-    <svg width="200px" height="258px" viewBox="0 0 156 258" id="pplboy">
+    <svg width="400px" height="536px" viewBox="0 0 156 258" id="pplboy">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g transform="translate(-189.000000, -386.000000)">
-          <path
-            d="M261.935243,386.335688 C271.393381,387.621459 277.081634,389.303261 279,391.381094 C280.269172,392.755768 283.584756,397.380817 281.49979,402.369565 C280.788803,404.070761 278.042369,406.614239 273.26049,410 C263.659038,412.957294 256.099331,414.43594 250.58137,414.43594 C245.06341,414.43594 236.202953,412.957294 224,410 C233.220013,404.476628 239.786415,399.910949 243.699204,396.302961 C247.611994,392.694973 253.690673,389.372549 261.935243,386.335688 Z"
-            fill="#D8D8D8"></path>
-        </g>
       </g>
     </svg>
     <svg width="1500" height="500" id="vis1">
@@ -229,7 +218,9 @@
         let chartWidth = width - margin.left - margin.right;
         let chartHeight = height - margin.top - margin.bottom;
 
-        var g2 = svg.append("g");
+        let svgGirl = d3.select("#pplgirl");
+        var g2 = svgGirl.append("g");
+        var girlColor = "#ffe6e6";
 
         // drawing svg girl in d3
         // head
@@ -237,7 +228,7 @@
           .attr("r", 38)
           .attr("cx", 81)
           .attr("cy", 60.5)
-          .style("fill", "#C17474");
+          .style("fill", girlColor);
 
         // leg 1
         g2.append("rect")
@@ -246,7 +237,7 @@
           .attr("width", 28)
           .attr("height", 66)
           .attr("rx", 14)
-          .style("fill", "#C17474");
+          .style("fill", girlColor);
 
         // leg 2
         g2.append("rect")
@@ -255,7 +246,7 @@
           .attr("width", 28)
           .attr("height", 66)
           .attr("rx", 14)
-          .style("fill", "#C17474");
+          .style("fill", girlColor);
 
         // arm 1
         g2.append("rect")
@@ -263,11 +254,9 @@
           .attr("y", 121)
           .attr("width", 86)
           .attr("height", 23)
-          .attr("transform",
-            // "translate(" + (i * 200) + "," + 0 + ")
-            "rotate(" + 30.0 + "," + 121 + "," + 135 + ")")
+          .attr("transform", "rotate(" + 30.0 + "," + 121 + "," + 135 + ")")
           .attr("rx", 11.5)
-          .style("fill", "#C17474");
+          .style("fill", girlColor);
 
         // arm 2
         g2.append("rect")
@@ -275,11 +264,9 @@
           .attr("y", 119)
           .attr("width", 86)
           .attr("height", 23)
-          .attr("transform",
-            // "translate(" + (i * 200) + "," + 0 + ")
-            "rotate(" + -30.0 + "," + 43 + "," + 130.5 + ")")
+          .attr("transform", "rotate(" + -30.0 + "," + 43 + "," + 130.5 + ")")
           .attr("rx", 11.5)
-          .style("fill", "#C17474");
+          .style("fill", girlColor);
 
         var bodyData = [
           { "x": 81.1212408, "y": 74 }, { "x": 116.483472, "y": 132.596679 },
@@ -296,7 +283,7 @@
 
         g2.append("path")
           .attr("d", bodyLine(bodyData))
-          .style("fill", "#C17474");
+          .style("fill", girlColor);
 
         var hairData = [
           { "x": 23.4085737, "y": 57.5528923 }, { "x": 27.4855021, "y": 57.5528923 },
@@ -310,23 +297,25 @@
           { "x": 28.1392098, "y": 24.9201247 }, { "x": 31.439328, "y": 42.5163424 },
           { "x": 28.1392098, "y": 45.3745369 }, { "x": 21.0384739, "y": 51.5244028 },
           { "x": 15.1575641, "y": 57.5528923 }, { "x": 23.4085737, "y": 57.5528923 },
-        ]
+        ];
 
         g2.append("path")
           .attr("d", bodyLine(hairData)) // uses same curve basis as body
-          .style("fill", "#D8D8D8");
+          .style("fill", "#ff9999");
 
+        svgGirl.attr("transform", "translate(750, 100)");
 
         // drawing svg boy
         let svgBoy = d3.select("#pplboy");
         var g1 = svgBoy.append("g");
 
+        var boyColor = "#e6f9ff";
         // head
         g1.append("circle")
           .attr("r", 38)
           .attr("cx", 81)
           .attr("cy", 50.5)
-          .style("fill", "#C17474")
+          .style("fill", boyColor)
 
         // leg 1
         g1.append("rect")
@@ -335,7 +324,7 @@
           .attr("width", 28)
           .attr("height", 66)
           .attr("rx", 14)
-          .style("fill", "#C17474");
+          .style("fill", boyColor);
 
         // leg 2
         g1.append("rect")
@@ -344,7 +333,7 @@
           .attr("width", 28)
           .attr("height", 66)
           .attr("rx", 14)
-          .style("fill", "#C17474");
+          .style("fill", boyColor);
 
         // arm 1
         g1.append("rect")
@@ -354,7 +343,7 @@
           .attr("height", 23)
           .attr("transform", "rotate(" + 30.0 + "," + 121 + "," + 135 + ")")
           .attr("rx", 11.5)
-          .style("fill", "#C17474");
+          .style("fill", boyColor);
 
         // arm 2
         g1.append("rect")
@@ -364,7 +353,7 @@
           .attr("height", 23)
           .attr("transform", "rotate(" + -30.0 + "," + 43 + "," + 130.5 + ")")
           .attr("rx", 11.5)
-          .style("fill", "#C17474");
+          .style("fill", boyColor);
 
         // body
         g1.append("rect")
@@ -373,7 +362,34 @@
           .attr("width", 86)
           .attr("height", 126)
           .attr("rx", 20)
-          .style("fill", "#C17474");
+          .style("fill", boyColor);
+
+        var boyHairData = [
+          { "x": 261.935243, "y": 386.335688 }, { "x": 271.393381, "y": 387.621459 },
+          { "x": 277.081634, "y": 389.303261 }, { "x": 279, "y": 391.381094 },
+          { "x": 280.269172, "y": 392.755768 }, { "x": 283.584756, "y": 397.380817 },
+          { "x": 281.49979, "y": 402.369565 }, { "x": 280.788803, "y": 404.070761 },
+          { "x": 278.042369, "y": 406.614239 }, { "x": 273.26049, "y": 410 },
+          { "x": 263.659038, "y": 412.957294 }, { "x": 256.099331, "y": 414.43594 },
+          { "x": 250.58137, "y": 414.43594 }, { "x": 245.06341, "y": 414.43594 },
+          { "x": 236.202953, "y": 412.957294 }, { "x": 224, "y": 410 },
+          { "x": 233.220013, "y": 404.476628 }, { "x": 239.786415, "y": 399.910949 },
+          { "x": 243.699204, "y": 396.302961 }, { "x": 247.611994, "y": 392.694973 },
+          { "x": 253.690673, "y": 389.372549 }, { "x": 261.935243, "y": 386.335688 }
+        ];
+
+        var hairLine = d3.line()
+          .x(d => d.x)
+          .y(d => d.y)
+          .curve(d3.curveBasis);
+
+        g1.append("path")
+          .attr("d", hairLine(boyHairData))
+          .attr("transform", "translate(-189.000000, -386.000000)")
+          .style("fill", "#99c2ff");
+
+        svgBoy.attr("transform", "translate(-150, 100)");
+
 
         // KELLYS PART
 
