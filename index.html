@@ -147,7 +147,6 @@
               m55andupPurchase += parseInt(d['Purchase']);
             }
           }
-
         });
 
         // calculating percentages
@@ -177,7 +176,7 @@
 
         var fScale = d3.scaleLinear()
           .domain([minFemale, maxFemale])
-          .range([1, 3]); // largest figure will be 3x smallest figure size
+          .range([1, 3]);
 
         let mPurchaseData = [
           m0to17Purchase, m18to25Purchase, m26to35Purchase, m36to45Purchase,
@@ -188,7 +187,7 @@
 
         var mScale = d3.scaleLinear()
           .domain([minMale, maxMale])
-          .range([1, 3]); // largest figure will be 3x smallest figure size
+          .range([1, 3]);
 
         // outputting results
         console.log("females =", females);
@@ -268,6 +267,7 @@
           .attr("rx", 11.5)
           .style("fill", girlColor);
 
+        // body
         var bodyData = [
           { "x": 81.1212408, "y": 74 }, { "x": 116.483472, "y": 132.596679 },
           { "x": 135.650022, "y": 174.392624 }, { "x": 138.620892, "y": 199.387835 },
@@ -285,6 +285,7 @@
           .attr("d", bodyLine(bodyData))
           .style("fill", girlColor);
 
+        // hair
         var hairData = [
           { "x": 23.4085737, "y": 57.5528923 }, { "x": 27.4855021, "y": 57.5528923 },
           { "x": 36.0329005, "y": 57.364705 }, { "x": 42.7104511, "y": 49.0840613 },
@@ -364,6 +365,7 @@
           .attr("rx", 20)
           .style("fill", boyColor);
 
+        // hair
         var boyHairData = [
           { "x": 261.935243, "y": 386.335688 }, { "x": 271.393381, "y": 387.621459 },
           { "x": 277.081634, "y": 389.303261 }, { "x": 279, "y": 391.381094 },
