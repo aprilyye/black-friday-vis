@@ -49,9 +49,6 @@
     shopping day in the United States.
   </div>
   <p>
-    <svg width="800" height="500" id="vis1">
-    </svg>
-
     <!-- girl svg -->
     <svg width="200px" height="268px" viewBox="0 0 156 268" id="pplgirl">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -66,6 +63,9 @@
           <path d="M261.935243,386.335688 C271.393381,387.621459 277.081634,389.303261 279,391.381094 C280.269172,392.755768 283.584756,397.380817 281.49979,402.369565 C280.788803,404.070761 278.042369,406.614239 273.26049,410 C263.659038,412.957294 256.099331,414.43594 250.58137,414.43594 C245.06341,414.43594 236.202953,412.957294 224,410 C233.220013,404.476628 239.786415,399.910949 243.699204,396.302961 C247.611994,392.694973 253.690673,389.372549 261.935243,386.335688 Z" fill="#D8D8D8"></path>
         </g>
       </g>
+    </svg>
+
+    <svg width="800" height="500" id="vis1">
     </svg>
 
   </p>
@@ -179,7 +179,7 @@
 
         // APRILS PART
         // svg backbone
-        let svg = d3.select("svg#vis1");
+        let svg = d3.select("#vis1");
         let width = svg.attr("width");
         let height = svg.attr("height");
         let margin = { top: 50, right: 50, bottom: 50, left: 50 };
@@ -187,7 +187,8 @@
         let chartHeight = height - margin.top - margin.bottom;
 
         // drawing svg girl in d3
-        let svgGirl = d3.select("#pplgirl");
+        let svgGirl = d3.select("#pplgirl")
+          .attr("transform", "translate(50, 100)");
         var g2 = svgGirl.append("g");
 
         // head
