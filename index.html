@@ -34,7 +34,17 @@
       text-align: center;
       border: solid 1px;
       padding: 30px;
+    }
 
+    #vis2 {
+      display: block;
+      border: solid 2px black;
+      margin: auto;
+      margin-top: 200px;
+    }
+
+    .title {
+      font-size: 20px;
     }
   </style>
 </head>
@@ -52,23 +62,34 @@
     <!-- girl svg -->
     <!-- <svg width="200px" height="268px" viewBox="0 0 156 268" id="pplgirl">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <path d="M23.4085737,57.5528923 C27.4855021,57.5528923 36.0329005,57.364705 42.7104511,49.0840613 C48.1730492,42.3100463 52.0455584,30.9361408 54.0264855,28.8393648 C57.4968188,25.166079 81,34.3379489 81,29.1813797 C81,17.4832267 67.2813195,0.125837351 54.0264855,0.125837351 C40.7716515,0.125837351 28.1392098,8.80580904 28.1392098,20.503962 C28.1392098,24.9201247 31.439328,42.5163424 28.1392098,45.3745369 C21.0384739,51.5244028 15.1575641,57.5528923 23.4085737,57.5528923 Z" fill="#D8D8D8"></path>
-          <path d="M81.1212408,74 C116.483472,132.596679 135.650022,174.392624 138.620892,199.387835 C142.809005,234.624229 21.1872481,233.371049 23.6215894,199.387835 C25.4867643,173.350141 44.6533147,131.554196 81.1212408,74 Z" id="Triangle" fill="#C17474"></path>
+        <path
+          d="M23.4085737,57.5528923 C27.4855021,57.5528923 36.0329005,57.364705 42.7104511,49.0840613 C48.1730492,42.3100463 52.0455584,30.9361408 54.0264855,28.8393648 C57.4968188,25.166079 81,34.3379489 81,29.1813797 C81,17.4832267 67.2813195,0.125837351 54.0264855,0.125837351 C40.7716515,0.125837351 28.1392098,8.80580904 28.1392098,20.503962 C28.1392098,24.9201247 31.439328,42.5163424 28.1392098,45.3745369 C21.0384739,51.5244028 15.1575641,57.5528923 23.4085737,57.5528923 Z"
+          fill="#D8D8D8"></path>
+        <path
+          d="M81.1212408,74 C116.483472,132.596679 135.650022,174.392624 138.620892,199.387835 C142.809005,234.624229 21.1872481,233.371049 23.6215894,199.387835 C25.4867643,173.350141 44.6533147,131.554196 81.1212408,74 Z"
+          id="Triangle" fill="#C17474"></path>
       </g>
     </svg> -->
-      <!-- guy svg -->
+    <!-- guy svg -->
+    </svg>
+    <!-- guy svg -->
     <svg width="200px" height="258px" viewBox="0 0 156 258" id="pplboy">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g transform="translate(-189.000000, -386.000000)">
-          <path d="M261.935243,386.335688 C271.393381,387.621459 277.081634,389.303261 279,391.381094 C280.269172,392.755768 283.584756,397.380817 281.49979,402.369565 C280.788803,404.070761 278.042369,406.614239 273.26049,410 C263.659038,412.957294 256.099331,414.43594 250.58137,414.43594 C245.06341,414.43594 236.202953,412.957294 224,410 C233.220013,404.476628 239.786415,399.910949 243.699204,396.302961 C247.611994,392.694973 253.690673,389.372549 261.935243,386.335688 Z" fill="#D8D8D8"></path>
+          <path
+            d="M261.935243,386.335688 C271.393381,387.621459 277.081634,389.303261 279,391.381094 C280.269172,392.755768 283.584756,397.380817 281.49979,402.369565 C280.788803,404.070761 278.042369,406.614239 273.26049,410 C263.659038,412.957294 256.099331,414.43594 250.58137,414.43594 C245.06341,414.43594 236.202953,412.957294 224,410 C233.220013,404.476628 239.786415,399.910949 243.699204,396.302961 C247.611994,392.694973 253.690673,389.372549 261.935243,386.335688 Z"
+            fill="#D8D8D8"></path>
         </g>
       </g>
     </svg>
-
     <svg width="1500" height="500" id="vis1">
-    </svg>
 
+    </svg>
   </p>
+  <div>
+    <svg width="1000" height="700" id="vis2">
+    </svg>
+  </div>
   <script>
     var blackFridayData1;
     var blackFridayData2
@@ -211,180 +232,216 @@
         var g2 = svg.append("g");
 
         // drawing svg girl in d3
-        fPurchaseData.forEach(function(d, i) {
-        console.log("i = ", i);
-
-        // head
-        g2.append("circle")
-          .attr("r", 38)
-          .attr("cx", 81+(i*200))
-          .attr("cy", 60.5)
-          .style("fill", "#C17474");
-
-        // leg 1
-        g2.append("rect")
-          .attr("x", 47+(i*200))
-          .attr("y", 202)
-          .attr("width", 28)
-          .attr("height", 66)
-          .attr("rx", 14)
-          .style("fill", "#C17474");
-
-        // leg 2
-        g2.append("rect")
-          .attr("x", 89+(i*200))
-          .attr("y", 202)
-          .attr("width", 28)
-          .attr("height", 66)
-          .attr("rx", 14)
-          .style("fill", "#C17474");
-
-        // arm 1
-        g2.append("rect")
-          .attr("x", 78)
-          .attr("y", 121)
-          .attr("width", 86)
-          .attr("height", 23)
-          .attr("transform",
-            "translate(" + (i*200) + "," + 0 + ") rotate(" + 30.0 + "," + 121 + "," + 135 + ")")
-          .attr("rx", 11.5)
-          .style("fill", "#C17474");
-
-        // arm 2
-        g2.append("rect")
-          .attr("x", 0)
-          .attr("y", 119)
-          .attr("width", 86)
-          .attr("height", 23)
-          .attr("transform",
-            "translate(" + (i*200) + "," + 0 + ") rotate(" + -30.0 + "," + 43 + "," + 130.5 + ")")
-          .attr("rx", 11.5)
-          .style("fill", "#C17474");
-
-        var bodyData = [
-          {"x": 81.1212408, "y": 74}, {"x": 116.483472, "y": 132.596679},
-          {"x": 135.650022, "y": 174.392624}, {"x": 138.620892, "y": 199.387835},
-          {"x": 142.809005, "y": 234.624229}, {"x": 21.1872481, "y": 233.371049},
-          {"x": 23.6215894, "y": 199.387835}, {"x": 25.4867643, "y": 173.350141},
-          {"x": 44.6533147, "y": 131.554196}, {"x": 81.1212408, "y": 74}
-        ];
-
-        var bodyLine = d3.line()
-          .x( d => d.x+(i*200))
-          .y( d => d.y)
-          .curve(d3.curveBasis);
-
-        g2.append("path")
-        .attr("d", bodyLine(bodyData))
-        .style("fill", "#C17474");
-
-        var hairData = [
-          {"x": 23.4085737, "y": 57.5528923}, {"x": 27.4855021, "y": 57.5528923},
-          {"x": 36.0329005, "y": 57.364705}, {"x": 42.7104511, "y": 49.0840613},
-          {"x": 48.1730492, "y": 42.3100463}, {"x": 52.0455584, "y": 30.9361408},
-          {"x": 54.0264855, "y": 28.8393648}, {"x": 57.4968188, "y": 25.166079},
-          {"x": 81, "y": 34.3379489}, {"x": 81, "y": 29.1813797},
-          {"x": 81, "y": 17.4832267}, {"x": 67.2813195, "y": 0.125837351},
-          {"x": 54.0264855, "y": 0.125837351}, {"x": 40.7716515, "y": 0.125837351},
-          {"x": 28.1392098, "y": 8.80580904}, {"x": 28.1392098, "y": 20.503962},
-          {"x": 28.1392098, "y": 24.9201247}, {"x": 31.439328, "y": 42.5163424},
-          {"x": 28.1392098, "y": 45.3745369}, {"x": 21.0384739, "y": 51.5244028},
-          {"x": 15.1575641, "y": 57.5528923}, {"x": 23.4085737, "y": 57.5528923},
-        ]
-
-        g2.append("path")
-        .attr("d", bodyLine(hairData)) // uses same curve basis as body
-        .style("fill", "#D8D8D8");
-
-      });
-
-
-        // drawing svg boy
-        let svgBoy = d3.select("#pplboy");
-        var g1 = svgBoy.append("g");
+        fPurchaseData.forEach(function (d, i) {
+          console.log("i = ", i);
 
           // head
-          g1.append("circle")
+          g2.append("circle")
             .attr("r", 38)
-            .attr("cx", 81)
-            .attr("cy", 50.5)
-            .style("fill", "#C17474")
+            .attr("cx", 81 + (i * 200))
+            .attr("cy", 60.5)
+            .style("fill", "#C17474");
 
           // leg 1
-          g1.append("rect")
-            .attr("x", 45)
-            .attr("y", 192)
+          g2.append("rect")
+            .attr("x", 47 + (i * 200))
+            .attr("y", 202)
             .attr("width", 28)
             .attr("height", 66)
             .attr("rx", 14)
             .style("fill", "#C17474");
 
           // leg 2
-          g1.append("rect")
-            .attr("x", 87)
-            .attr("y", 192)
+          g2.append("rect")
+            .attr("x", 89 + (i * 200))
+            .attr("y", 202)
             .attr("width", 28)
             .attr("height", 66)
             .attr("rx", 14)
             .style("fill", "#C17474");
 
           // arm 1
-          g1.append("rect")
+          g2.append("rect")
             .attr("x", 78)
-            .attr("y", 111)
+            .attr("y", 121)
             .attr("width", 86)
             .attr("height", 23)
-            .attr("transform", "rotate(" + 30.0 + "," + 121 + "," + 135 + ")")
+            .attr("transform",
+              "translate(" + (i * 200) + "," + 0 + ") rotate(" + 30.0 + "," + 121 + "," + 135 + ")")
             .attr("rx", 11.5)
             .style("fill", "#C17474");
 
           // arm 2
-          g1.append("rect")
+          g2.append("rect")
             .attr("x", 0)
-            .attr("y", 111)
+            .attr("y", 119)
             .attr("width", 86)
             .attr("height", 23)
-            .attr("transform", "rotate(" + -30.0 + "," + 43 + "," + 130.5 + ")")
+            .attr("transform",
+              "translate(" + (i * 200) + "," + 0 + ") rotate(" + -30.0 + "," + 43 + "," + 130.5 + ")")
             .attr("rx", 11.5)
             .style("fill", "#C17474");
 
-          // body
-          g1.append("rect")
-            .attr("x", 37)
-            .attr("y", 88)
-            .attr("width", 86)
-            .attr("height", 126)
-            .attr("rx", 20)
+          var bodyData = [
+            { "x": 81.1212408, "y": 74 }, { "x": 116.483472, "y": 132.596679 },
+            { "x": 135.650022, "y": 174.392624 }, { "x": 138.620892, "y": 199.387835 },
+            { "x": 142.809005, "y": 234.624229 }, { "x": 21.1872481, "y": 233.371049 },
+            { "x": 23.6215894, "y": 199.387835 }, { "x": 25.4867643, "y": 173.350141 },
+            { "x": 44.6533147, "y": 131.554196 }, { "x": 81.1212408, "y": 74 }
+          ];
+
+          var bodyLine = d3.line()
+            .x(d => d.x + (i * 200))
+            .y(d => d.y)
+            .curve(d3.curveBasis);
+
+          g2.append("path")
+            .attr("d", bodyLine(bodyData))
             .style("fill", "#C17474");
+
+          var hairData = [
+            { "x": 23.4085737, "y": 57.5528923 }, { "x": 27.4855021, "y": 57.5528923 },
+            { "x": 36.0329005, "y": 57.364705 }, { "x": 42.7104511, "y": 49.0840613 },
+            { "x": 48.1730492, "y": 42.3100463 }, { "x": 52.0455584, "y": 30.9361408 },
+            { "x": 54.0264855, "y": 28.8393648 }, { "x": 57.4968188, "y": 25.166079 },
+            { "x": 81, "y": 34.3379489 }, { "x": 81, "y": 29.1813797 },
+            { "x": 81, "y": 17.4832267 }, { "x": 67.2813195, "y": 0.125837351 },
+            { "x": 54.0264855, "y": 0.125837351 }, { "x": 40.7716515, "y": 0.125837351 },
+            { "x": 28.1392098, "y": 8.80580904 }, { "x": 28.1392098, "y": 20.503962 },
+            { "x": 28.1392098, "y": 24.9201247 }, { "x": 31.439328, "y": 42.5163424 },
+            { "x": 28.1392098, "y": 45.3745369 }, { "x": 21.0384739, "y": 51.5244028 },
+            { "x": 15.1575641, "y": 57.5528923 }, { "x": 23.4085737, "y": 57.5528923 },
+          ]
+
+          g2.append("path")
+            .attr("d", bodyLine(hairData)) // uses same curve basis as body
+            .style("fill", "#D8D8D8");
+
+        });
+
+
+        // drawing svg boy
+        let svgBoy = d3.select("#pplboy");
+        var g1 = svgBoy.append("g");
+
+        // head
+        g1.append("circle")
+          .attr("r", 38)
+          .attr("cx", 81)
+          .attr("cy", 50.5)
+          .style("fill", "#C17474")
+
+        // leg 1
+        g1.append("rect")
+          .attr("x", 45)
+          .attr("y", 192)
+          .attr("width", 28)
+          .attr("height", 66)
+          .attr("rx", 14)
+          .style("fill", "#C17474");
+
+        // leg 2
+        g1.append("rect")
+          .attr("x", 87)
+          .attr("y", 192)
+          .attr("width", 28)
+          .attr("height", 66)
+          .attr("rx", 14)
+          .style("fill", "#C17474");
+
+        // arm 1
+        g1.append("rect")
+          .attr("x", 78)
+          .attr("y", 111)
+          .attr("width", 86)
+          .attr("height", 23)
+          .attr("transform", "rotate(" + 30.0 + "," + 121 + "," + 135 + ")")
+          .attr("rx", 11.5)
+          .style("fill", "#C17474");
+
+        // arm 2
+        g1.append("rect")
+          .attr("x", 0)
+          .attr("y", 111)
+          .attr("width", 86)
+          .attr("height", 23)
+          .attr("transform", "rotate(" + -30.0 + "," + 43 + "," + 130.5 + ")")
+          .attr("rx", 11.5)
+          .style("fill", "#C17474");
+
+        // body
+        g1.append("rect")
+          .attr("x", 37)
+          .attr("y", 88)
+          .attr("width", 86)
+          .attr("height", 126)
+          .attr("rx", 20)
+          .style("fill", "#C17474");
 
         // KELLYS PART
 
-        // // Scales
-        // let ageGroupScale = d3.scalePoint()
-        //   .domain(["0-17", "18-25", "26-35", "36-45", "46-50", "51-55", "55+"])
-        //   .range([20, chartWidth]);
-        // let maxPurchase = d3.max([f0to17Purchase, f18to25Purchase, f26to35Purchase,
-        //   f36to45Purchase, f46to50Purchase, f51to55Purchase, f55andupPurchase,
-        //   m0to17Purchase, m18to25Purchase, m26to35Purchase, m36to45Purchase,
-        //   m46to50Purchase, m51to55Purchase, m55andupPurchase]);
-        // let purchasesScale = d3.scaleLinear()
-        //   .domain([0, maxPurchase])
-        //   .range([chartHeight, 0]);
+        // svg backbone
+        let svg2 = d3.select("#vis2");
+        let width2 = svg2.attr("width");
+        let height2 = svg2.attr("height");
+        let margin2 = { top: 50, right: 50, bottom: 50, left: 50 };
+        let chartWidth2 = width2 - margin2.left - margin2.right;
+        let chartHeight2 = height2 - margin2.top - margin2.bottom;
 
-        // // X and Y axes
-        // let xAxis = d3.axisBottom()
-        //   .scale(ageGroupScale);
-        // let yAxis = d3.axisLeft()
-        //   .ticks(10, d3.format("$"))
-        //   .scale(purchasesScale);
-        // svg.append("g")
-        //   .attr("transform", "translate(" + margin.left + "," + (margin.top + chartHeight) + ")")
-        //   .call(xAxis)
-        //   .style("font-size", "8");
-        // svg.append("g")
-        //   .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-        //   .call(yAxis)
-        //   .style("font-size", "8");
+        // Title
+        svg2.append("text")
+          .attr("x", 200)
+          .attr("y", 30)
+          .text("Amount Spent on Purchases, Years Lived in City, and Marital Status")
+          .attr("class", "title")
+
+        // Scales
+        let maxYears = d3.max(blackFridayData1, function (d) {
+          return Math.max(d['Stay_In_Current_City_Years']);
+        });
+        let yearScale = d3.scalePoint()
+          .domain(["0", "1", "2", "3", "4+"])
+          .range([20, chartWidth2]);
+        let maxPurchase = d3.max(blackFridayData1, function (d) {
+          return Math.max(d['Purchase']);
+        });
+        let purchasesScale = d3.scaleLinear()
+          .domain([0, maxPurchase])
+          .range([chartHeight2, 0]);
+        let colorScale = ["blue", "red"];
+        let maritalScale = d3.scaleOrdinal(colorScale);
+
+        // X and Y axes
+        let xAxis = d3.axisBottom()
+          .scale(yearScale);
+        let yAxis = d3.axisLeft()
+          .ticks(10, d3.format("$"))
+          .scale(purchasesScale);
+        svg2.append("g")
+          .attr("transform", "translate(" + margin2.left + "," + (margin2.top + chartHeight2) + ")")
+          .call(xAxis)
+          .style("font-size", "8");
+        svg2.append("g")
+          .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")")
+          .call(yAxis)
+          .style("font-size", "8");
+
+        // Draw the circles
+        let plot = svg2.append("g")
+          .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+        // data1.forEach((d, i) => {
+        //   let year = yearScale(d['Stay_In_Current_City_Years']);
+        //   let purchase = purchasesScale(d['Purchase']);
+        //   let marital = maritalScale(d['Marital_Status']);
+        //   let circle = plot.append("circle")
+        //     .attr("cx", year)
+        //     .attr("cy", purchase)
+        //     .attr("r", 5)
+        //     .style("fill", marital)
+        //     .attr("opacity", 0.7)
+        // });
+
 
         // KENNY'S PART
       })
