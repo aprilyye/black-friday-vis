@@ -309,13 +309,13 @@
         ];
 
         var girlColorPercentages = {
-          0: "#990000",
-          1: "#cc0000",
-          2: "#ff1a1a",
-          3: "#ff4d4d",
-          4: "#ff8080",
-          5: "#ffb3b3",
-          6: "#ffe6e6"
+          0: {color: "#990000", group: "Ages <17"},
+          1: {color: "#cc0000", group: "Ages 18-25"},
+          2: {color: "#ff1a1a", group: "Ages 26-35"},
+          3: {color: "#ff4d4d", group: "Ages 36-45"},
+          4: {color: "#ff8080", group: "Ages 46-50"},
+          5: {color: "#ffb3b3", group: "Ages 51-54"},
+          6: {color: "#ffe6e6", group: "Ages 55+"}
         };
 
         var fScale = d3.scaleLinear()
@@ -324,12 +324,19 @@
 
         var lastY = 0;
         fPercentData.forEach(function(d, i) {
-          console.log("last y =", fScale(d));
           gScale.append("rect")
+            .attr("x", 0)
             .attr("y", (-110+lastY))
             .attr("width", 100)
             .attr("height", fScale(d))
-            .style("fill", girlColorPercentages[i])
+            .style("fill", girlColorPercentages[i].color)
+
+          gScale.append("text")
+            .attr("dx", 100)
+            .attr("dy", (-110+lastY+10))
+            .attr("font-size", 18)
+            .style("fill", "white")
+            .text(girlColorPercentages[i].group)
 
           lastY += fScale(d);
         });
@@ -420,7 +427,7 @@
           .attr("transform", "translate(-189.000000, -386.000000)")
           .style("fill", "#99c2ff");
 
-        svgBoy.attr("transform", "translate(-200, 100)");
+        svgBoy.attr("transform", "translate(-285, 100)");
 
         // male rectangle bar
         let boyScale = d3.select("#bScale");
@@ -455,7 +462,7 @@
             .style("fill", boyColorPercentages[i].color)
 
           bScale.append("text")
-            .attr("dx", 0)
+            .attr("dx", 5)
             .attr("dy", (-110+lastY2+10))
             .attr("font-size", 18)
             .style("fill", "white")
@@ -464,7 +471,7 @@
           lastY2 += mScale(d);
         });
 
-        boyScale.attr("transform", "translate(-830, 100)");
+        boyScale.attr("transform", "translate(-900, 100)");
 
 
         // KELLYS PART
