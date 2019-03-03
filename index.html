@@ -68,7 +68,7 @@
       </g>
     </svg>
     <!-- girl scale -->
-    <svg width="110px" height="610px" viewBox="0 0 156 268" id="gScale">
+    <svg width="190px" height="610px" viewBox="0 0 220 268" id="gScale">
       <g stroke="none" stroke-width="1" fill="none">
       </g>
     </svg>
@@ -78,7 +78,7 @@
       </g>
     </svg>
     <!-- guy scale -->
-    <svg width="110px" height="610px" viewBox="0 0 156 268" id="bScale">
+    <svg width="190px" height="610px" viewBox="0 0 220 268" id="bScale">
       <g stroke="none" stroke-width="1" fill="none">
       </g>
     </svg>
@@ -310,13 +310,13 @@
         ];
 
         var girlColorPercentages = {
-          0: "#990000",
-          1: "#cc0000",
-          2: "#ff1a1a",
-          3: "#ff4d4d",
-          4: "#ff8080",
-          5: "#ffb3b3",
-          6: "#ffe6e6"
+          0: { color: "#990000", group: "Ages <17" },
+          1: { color: "#cc0000", group: "Ages 18-25" },
+          2: { color: "#ff1a1a", group: "Ages 26-35" },
+          3: { color: "#ff4d4d", group: "Ages 36-45" },
+          4: { color: "#ff8080", group: "Ages 46-50" },
+          5: { color: "#ffb3b3", group: "Ages 51-54" },
+          6: { color: "#ffe6e6", group: "Ages 55+" }
         };
 
         var fScale = d3.scaleLinear()
@@ -325,12 +325,19 @@
 
         var lastY = 0;
         fPercentData.forEach(function (d, i) {
-          console.log("last y =", fScale(d));
           gScale.append("rect")
+            .attr("x", 0)
             .attr("y", (-110 + lastY))
             .attr("width", 100)
             .attr("height", fScale(d))
-            .style("fill", girlColorPercentages[i])
+            .style("fill", girlColorPercentages[i].color)
+
+          gScale.append("text")
+            .attr("dx", 100)
+            .attr("dy", (-110 + lastY + 10))
+            .attr("font-size", 18)
+            .style("fill", "white")
+            .text(girlColorPercentages[i].group)
 
           lastY += fScale(d);
         });
@@ -421,17 +428,11 @@
           .attr("transform", "translate(-189.000000, -386.000000)")
           .style("fill", "#99c2ff");
 
-        svgBoy.attr("transform", "translate(-200, 100)");
+        svgBoy.attr("transform", "translate(-285, 100)");
 
         // male rectangle bar
         let boyScale = d3.select("#bScale");
         var bScale = boyScale.append("g");
-
-        bScale.append("rect")
-          .attr("y", -110)
-          .attr("width", 100)
-          .attr("height", 600)
-          .style("fill", boyColor);
 
         let mPercentData = [
           m0to17Percent, m18to25Percent, m26to35Percent, m36to45Percent,
@@ -439,13 +440,13 @@
         ];
 
         var boyColorPercentages = {
-          0: "#002db3",
-          1: "#0039e6",
-          2: "#1a53ff",
-          3: "#4d79ff",
-          4: "#668cff",
-          5: "#99b3ff",
-          6: "#ccd9ff"
+          0: { color: "#002db3", group: "Ages <17" },
+          1: { color: "#0039e6", group: "Ages 18-25" },
+          2: { color: "#1a53ff", group: "Ages 26-35" },
+          3: { color: "#4d79ff", group: "Ages 36-45" },
+          4: { color: "#668cff", group: "Ages 46-50" },
+          5: { color: "#99b3ff", group: "Ages 51-54" },
+          6: { color: "#ccd9ff", group: "Ages 55+" }
         };
 
         var mScale = d3.scaleLinear()
@@ -454,17 +455,24 @@
 
         var lastY2 = 0;
         mPercentData.forEach(function (d, i) {
-          console.log("here testing", lastY2);
           bScale.append("rect")
+            .attr("x", 100)
             .attr("y", (-110 + lastY2))
             .attr("width", 100)
             .attr("height", mScale(d))
-            .style("fill", boyColorPercentages[i])
+            .style("fill", boyColorPercentages[i].color)
+
+          bScale.append("text")
+            .attr("dx", 5)
+            .attr("dy", (-110 + lastY2 + 10))
+            .attr("font-size", 18)
+            .style("fill", "white")
+            .text(boyColorPercentages[i].group)
 
           lastY2 += mScale(d);
         });
 
-        boyScale.attr("transform", "translate(-730, 100)");
+        boyScale.attr("transform", "translate(-900, 100)");
 
 
         // KELLYS PART
