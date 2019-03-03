@@ -66,6 +66,11 @@
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       </g>
     </svg>
+    <!-- girl scale -->
+    <svg width="110px" height="610px" viewBox="0 0 156 268" id="gScale">
+      <g stroke="none" stroke-width="1" fill="none">
+      </g>
+    </svg>
     <!-- guy svg -->
     <svg width="400px" height="536px" viewBox="0 0 156 258" id="pplboy">
       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -165,18 +170,6 @@
         var m46to50Percent = (m46to50 / males).toFixed(2);
         var m51to55Percent = (m51to55 / males).toFixed(2);
         var m55andupPercent = (m55andup / males).toFixed(2);
-
-        // scale for svg ppl size
-        let fPurchaseData = [
-          f0to17Purchase, f18to25Purchase, f26to35Purchase, f36to45Purchase,
-          f46to50Purchase, f51to55Purchase, f55andupPurchase
-        ];
-        let minFemale = d3.min(fPurchaseData);
-        let maxFemale = d3.max(fPurchaseData);
-
-        var fScale = d3.scaleLinear()
-          .domain([minFemale, maxFemale])
-          .range([1, 3]);
 
         let mPurchaseData = [
           m0to17Purchase, m18to25Purchase, m26to35Purchase, m36to45Purchase,
@@ -306,6 +299,49 @@
 
         svgGirl.attr("transform", "translate(750, 100)");
 
+        // female rectangle bar
+        let girlScale = d3.select("#gScale");
+        var gScale = girlScale.append("g");
+
+        gScale.append("rect")
+          .attr("y", -110)
+          .attr("width", 100)
+          .attr("height", 600)
+          .style("fill", girlColor);
+
+        let fPercentData = [
+          f0to17Percent, f18to25Percent, f26to35Percent, f36to45Percent,
+          f46to50Percent, f51to55Percent, f55andupPercent
+        ];
+
+        var colorPercentages = {
+          0: "#990000",
+          1: "#cc0000",
+          2: "#ff1a1a",
+          3: "#ff4d4d",
+          4: "#ff8080",
+          5: "#ffb3b3",
+          6: "#ffe6e6"
+        };
+
+        var fScale = d3.scaleLinear()
+          .domain([0, 1])
+          .range([1, 600]);
+
+        var lastY = 0;
+        fPercentData.forEach(function(d, i) {
+          console.log("last y =", fScale(d));
+          gScale.append("rect")
+            .attr("y", (-110+lastY))
+            .attr("width", 100)
+            .attr("height", fScale(d))
+            .style("fill", colorPercentages[i])
+
+          lastY += fScale(d);
+        });
+
+        girlScale.attr("transform", "translate(850, 100)");
+
         // drawing svg boy
         let svgBoy = d3.select("#pplboy");
         var g1 = svgBoy.append("g");
@@ -392,7 +428,6 @@
 
         svgBoy.attr("transform", "translate(-150, 100)");
 
-
         // KELLYS PART
 
         // svg backbone
@@ -456,7 +491,6 @@
         //     .style("fill", marital)
         //     .attr("opacity", 0.7)
         // });
-
 
         // KENNY'S PART
       })
