@@ -42,7 +42,7 @@
       display: block;
       border: solid 2px black;
       margin: auto;
-      margin-top: 200px;
+      margin-top: -50px;
     }
 
     .title {
@@ -491,6 +491,7 @@
           .attr("y", 30)
           .text("Amount Spent on Purchases, Years Lived in City, and Age Group")
           .attr("class", "title")
+          .style("fill", "white");
 
         // Compiling data for age groups and purchases
         var data3;
@@ -511,30 +512,29 @@
           return Math.max(d['Stay_In_Current_City_Years']);
         });
         let yearScale = d3.scaleBand()
-          .domain(["0", "1", "2", "3", "4+"])
-          .range([20, chartWidth2])
+          .domain(["0", "1", "2", "3", "4"])
+          .rangeRound([20, chartWidth2])
           .paddingInner(0.1);
         let maxPurchase = d3.max([f0to17Purchase, f18to25Purchase, f26to35Purchase,
           f36to45Purchase, f46to50Purchase, f51to55Purchase, f55andupPurchase,
           m0to17Purchase, m18to25Purchase, m26to35Purchase, m36to45Purchase,
           m46to50Purchase, m51to55Purchase, m55andupPurchase]);
         let purchasesScale = d3.scaleLinear()
-          .domain([0, maxPurchase])
+          .domain([0, 758717271])
           .range([chartHeight2, 0]);
         let colorScale = d3.scaleOrdinal()
           .domain(["0-17", "18-25", "26-35", "36-45", "46-50", "51-55", "55+"])
-          .range(["#9AD5CA", "#ACDDE7", "#ADB9E3", "#A379C9", "#B744B8",
-            "#4F517D", "#A28497"]);
+          .range(["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#0c2c84"]);
         let ageGroupScale = d3.scaleBand()
           .domain(["0-17", "18-25", "26-35", "36-45", "46-50", "51-55", "55+"])
-          .range([0, yearScale.bandwidth()])
+          .rangeRound([0, yearScale.bandwidth()])
           .padding(0.05);
 
         // X and Y axes
         let xAxis = d3.axisBottom()
           .scale(yearScale);
         let yAxis = d3.axisLeft()
-          .ticks(10, d3.format("$"))
+          .ticks(10, d3.format("$s"))
           .scale(purchasesScale);
         svg2.append("g")
           .attr("transform", "translate(" + margin2.left + "," + (margin2.top + chartHeight2) + ")")
@@ -545,53 +545,38 @@
           .call(yAxis)
           .style("font-size", "8");
 
+        var data3_keys = Object.keys(data3)
 
+        var parsed_data3 = [];
+        var keys = ["0-17", "18-25", "26-35", "36-45", "46-50", "51-55", "55+"];
+        data3_keys.forEach(function (k) {
+          for (var i = 0; i < keys.length; i++) {
+            parsed_data3.push([k, keys[i], data3[k].values[i]]);
+          }
+        });
 
-        console.log("data is", data3);
-        console.log("hello this is", data3[0].values[0].key);
-        console.log("key is", data3[0].key);
+        console.log("parsed", parsed_data3);
 
-        // Draw the bars
-        let graph = svg2.append("g")
-          .data(data3)
-          .enter()
-          .append("g")
-          .attr("transform", function (d) { return "translate(" + yearScale(d.key) + ",0)"; });
-
-        graph.selectAll("bar")
-          .data(data3)
+        let rect = svg2.append("g")
+          .selectAll("bar")
+          .data(parsed_data3)
           .enter().append("rect")
+          .attr("transform", function (d) { return "translate(50 ,50)"; })
           .attr("x", function (d) {
-            var k = 0;
-            return ageGroupScale(d.values[0].key);
-            console.log("data is", d)
-            // for (k = 0; k <= 6; k++) {
-            //   ageGroupScale(d.values[k].key);
-            // };
-            // return;
+            return ageGroupScale(d[1]) + yearScale(d[0]);
           })
-          .attr("y", function (d, i) {
-            return ageGroupScale(d.values[0].value)
-            // for (let k = 0; k <= 6; k++) {
-            //   purchasesScale(d.values[k].value);
-            // };
-            // return;
+          .attr("y", function (d) {
+            return purchasesScale(d[2].value);
           })
           .attr("width", ageGroupScale.bandwidth())
-          .attr("height", function (d, i) {
-            return chartHeight2 - purchasesScale(d.values[0].value);
-            // for (let k = 0; k <= 6; k++) {
-            //   chartHeight2 - purchasesScale(d.values[k].value);
-            // };
-            // return;
+          .attr("height", function (d) {
+            return chartHeight2 - purchasesScale(d[2].value);
           })
-          .attr("fill", "white");
-        //function (d, i) {
-        //   for (let k = 0; k <= 6; k++) {
-        //     colorScale(d.values[k].key);
-        //   };
-        //   return;
-        // });
+          .attr("fill",
+            function (d, i) {
+              return colorScale(d[1]);
+            });
+
         // KENNY'S PART
       })
     })
