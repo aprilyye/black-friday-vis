@@ -47,6 +47,7 @@
 
     .title {
       font-size: 20px;
+      color: white;
     }
   </style>
 </head>
@@ -323,10 +324,10 @@
           .range([1, 600]);
 
         var lastY = 0;
-        fPercentData.forEach(function(d, i) {
+        fPercentData.forEach(function (d, i) {
           console.log("last y =", fScale(d));
           gScale.append("rect")
-            .attr("y", (-110+lastY))
+            .attr("y", (-110 + lastY))
             .attr("width", 100)
             .attr("height", fScale(d))
             .style("fill", girlColorPercentages[i])
@@ -452,10 +453,10 @@
           .range([1, 600]);
 
         var lastY2 = 0;
-        mPercentData.forEach(function(d, i) {
+        mPercentData.forEach(function (d, i) {
           console.log("here testing", lastY2);
           bScale.append("rect")
-            .attr("y", (-110+lastY2))
+            .attr("y", (-110 + lastY2))
             .attr("width", 100)
             .attr("height", mScale(d))
             .style("fill", boyColorPercentages[i])
@@ -480,24 +481,46 @@
         svg2.append("text")
           .attr("x", 200)
           .attr("y", 30)
-          .text("Amount Spent on Purchases, Years Lived in City, and Marital Status")
+          .text("Amount Spent on Purchases, Years Lived in City, and Age Group")
           .attr("class", "title")
+
+        // Compiling data for age groups and purchases
+        var data3;
+        data3 = d3.nest()
+          .key(function (d) {
+            return d['Stay_In_Current_City_Years'];
+          })
+          .key(function (d) {
+            return d['Age'];
+          })
+          .rollup((function (d) {
+            return d3.sum(d, function (e) { return e['Purchase']; })
+          }))
+          .entries(data1);
 
         // Scales
         let maxYears = d3.max(blackFridayData1, function (d) {
           return Math.max(d['Stay_In_Current_City_Years']);
         });
-        let yearScale = d3.scalePoint()
+        let yearScale = d3.scaleBand()
           .domain(["0", "1", "2", "3", "4+"])
-          .range([20, chartWidth2]);
-        let maxPurchase = d3.max(blackFridayData1, function (d) {
-          return Math.max(d['Purchase']);
-        });
+          .range([20, chartWidth2])
+          .paddingInner(0.1);
+        let maxPurchase = d3.max([f0to17Purchase, f18to25Purchase, f26to35Purchase,
+          f36to45Purchase, f46to50Purchase, f51to55Purchase, f55andupPurchase,
+          m0to17Purchase, m18to25Purchase, m26to35Purchase, m36to45Purchase,
+          m46to50Purchase, m51to55Purchase, m55andupPurchase]);
         let purchasesScale = d3.scaleLinear()
           .domain([0, maxPurchase])
           .range([chartHeight2, 0]);
-        let colorScale = ["blue", "red"];
-        let maritalScale = d3.scaleOrdinal(colorScale);
+        let colorScale = d3.scaleOrdinal()
+          .domain(["0-17", "18-25", "26-35", "36-45", "46-50", "51-55", "55+"])
+          .range(["#9AD5CA", "#ACDDE7", "#ADB9E3", "#A379C9", "#B744B8",
+            "#4F517D", "#A28497"]);
+        let ageGroupScale = d3.scaleBand()
+          .domain(["0-17", "18-25", "26-35", "36-45", "46-50", "51-55", "55+"])
+          .range([0, yearScale.bandwidth()])
+          .padding(0.05);
 
         // X and Y axes
         let xAxis = d3.axisBottom()
@@ -514,22 +537,53 @@
           .call(yAxis)
           .style("font-size", "8");
 
-        // Draw the circles
-        let plot = svg2.append("g")
-          .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
-        // data1.forEach((d, i) => {
-        //   let year = yearScale(d['Stay_In_Current_City_Years']);
-        //   let purchase = purchasesScale(d['Purchase']);
-        //   let marital = maritalScale(d['Marital_Status']);
-        //   let circle = plot.append("circle")
-        //     .attr("cx", year)
-        //     .attr("cy", purchase)
-        //     .attr("r", 5)
-        //     .style("fill", marital)
-        //     .attr("opacity", 0.7)
+
+        console.log("data is", data3);
+        console.log("hello this is", data3[0].values[0].key);
+        console.log("key is", data3[0].key);
+
+        // Draw the bars
+        let graph = svg2.append("g")
+          .data(data3)
+          .enter()
+          .append("g")
+          .attr("transform", function (d) { return "translate(" + yearScale(d.key) + ",0)"; });
+
+        graph.selectAll("bar")
+          .data(data3)
+          .enter().append("rect")
+          .attr("x", function (d) {
+            var k = 0;
+            return ageGroupScale(d.values[0].key);
+            console.log("data is", d)
+            // for (k = 0; k <= 6; k++) {
+            //   ageGroupScale(d.values[k].key);
+            // };
+            // return;
+          })
+          .attr("y", function (d, i) {
+            return ageGroupScale(d.values[0].value)
+            // for (let k = 0; k <= 6; k++) {
+            //   purchasesScale(d.values[k].value);
+            // };
+            // return;
+          })
+          .attr("width", ageGroupScale.bandwidth())
+          .attr("height", function (d, i) {
+            return chartHeight2 - purchasesScale(d.values[0].value);
+            // for (let k = 0; k <= 6; k++) {
+            //   chartHeight2 - purchasesScale(d.values[k].value);
+            // };
+            // return;
+          })
+          .attr("fill", "white");
+        //function (d, i) {
+        //   for (let k = 0; k <= 6; k++) {
+        //     colorScale(d.values[k].key);
+        //   };
+        //   return;
         // });
-
         // KENNY'S PART
       })
     })
