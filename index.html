@@ -291,7 +291,7 @@
           .attr("d", bodyLine(hairData)) // uses same curve basis as body
           .style("fill", "#ff9999");
 
-        svgGirl.attr("transform", "translate(750, 100)");
+        svgGirl.attr("transform", "translate(700, 100)");
 
         // female rectangle bar
         let girlScale = d3.select("#gScale");
@@ -334,7 +334,7 @@
           lastY += fScale(d);
         });
 
-        girlScale.attr("transform", "translate(850, 100)");
+        girlScale.attr("transform", "translate(750, 100)");
 
         // drawing svg boy
         let svgBoy = d3.select("#pplboy");
@@ -420,7 +420,7 @@
           .attr("transform", "translate(-189.000000, -386.000000)")
           .style("fill", "#99c2ff");
 
-        svgBoy.attr("transform", "translate(-150, 100)");
+        svgBoy.attr("transform", "translate(-200, 100)");
 
         // male rectangle bar
         let boyScale = d3.select("#bScale");
