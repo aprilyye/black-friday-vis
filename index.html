@@ -678,7 +678,7 @@
 
         // Make the legend
         var legend = svg2.selectAll(".legend")
-          .data(keys.reverse())
+          .data(keys)
           .enter()
           .append("g")
           .attr("transform", function (d, i) { return "translate(0," + i * 10 + ")"; });
