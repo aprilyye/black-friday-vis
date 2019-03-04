@@ -25,6 +25,12 @@
       margin-top: 5px;
     }
 
+    #svgHeader {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 150px;
+    }
+
     div {
       margin: 30px;
     }
@@ -61,31 +67,27 @@
     groups and genders by analyzing the amount spent on purchases on this popular
     shopping day in the United States.
   </div>
-  <p>
-    <!-- girl svg -->
-    <svg width="400px" height="536px" viewBox="0 0 156 268" id="pplgirl">
-      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      </g>
-    </svg>
-    <!-- girl scale -->
-    <svg width="190px" height="610px" viewBox="0 0 220 268" id="gScale">
-      <g stroke="none" stroke-width="1" fill="none">
-      </g>
-    </svg>
-    <!-- guy svg -->
-    <svg width="400px" height="536px" viewBox="0 0 156 258" id="pplboy">
-      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      </g>
-    </svg>
-    <!-- guy scale -->
-    <svg width="190px" height="610px" viewBox="0 0 220 268" id="bScale">
-      <g stroke="none" stroke-width="1" fill="none">
-      </g>
-    </svg>
-    <svg width="1500" height="500" id="vis1">
-
-    </svg>
-  </p>
+  <p id="svgHeader">Percentage of Consumers per Age Group for Males and Females</p>
+  <!-- girl svg -->
+  <svg width="400px" height="536px" viewBox="0 0 156 268" id="pplgirl">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    </g>
+  </svg>
+  <!-- girl scale -->
+  <svg width="190px" height="610px" viewBox="0 0 220 268" id="gScale">
+    <g stroke="none" stroke-width="1" fill="none">
+    </g>
+  </svg>
+  <!-- guy svg -->
+  <svg width="400px" height="536px" viewBox="0 0 156 258" id="pplboy">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    </g>
+  </svg>
+  <!-- guy scale -->
+  <svg width="190px" height="610px" viewBox="0 0 220 268" id="bScale">
+    <g stroke="none" stroke-width="1" fill="none">
+    </g>
+  </svg>
   <div>
     <svg width="1000" height="700" id="vis2">
     </svg>
@@ -197,14 +199,6 @@
         console.log("males55 =", m55andup, m55andupPercent, m55andupPurchase);
 
         // APRILS PART
-        // svg backbone
-        let svg = d3.select("#vis1");
-        let width = svg.attr("width");
-        let height = svg.attr("height");
-        let margin = { top: 50, right: 50, bottom: 50, left: 50 };
-        let chartWidth = width - margin.left - margin.right;
-        let chartHeight = height - margin.top - margin.bottom;
-
         let svgGirl = d3.select("#pplgirl");
         var g2 = svgGirl.append("g");
         var girlColor = "#ffe6e6";
@@ -292,7 +286,7 @@
           .attr("d", bodyLine(hairData)) // uses same curve basis as body
           .style("fill", "#ff9999");
 
-        svgGirl.attr("transform", "translate(700, 100)");
+        svgGirl.attr("transform", "translate(700, 0)");
 
         // female rectangle bar
         let girlScale = d3.select("#gScale");
@@ -342,7 +336,7 @@
           lastY += fScale(d);
         });
 
-        girlScale.attr("transform", "translate(750, 100)");
+        girlScale.attr("transform", "translate(750, 0)");
 
         // drawing svg boy
         let svgBoy = d3.select("#pplboy");
@@ -428,7 +422,7 @@
           .attr("transform", "translate(-189.000000, -386.000000)")
           .style("fill", "#99c2ff");
 
-        svgBoy.attr("transform", "translate(-285, 100)");
+        svgBoy.attr("transform", "translate(-285, 0)");
 
         // male rectangle bar
         let boyScale = d3.select("#bScale");
@@ -472,7 +466,7 @@
           lastY2 += mScale(d);
         });
 
-        boyScale.attr("transform", "translate(-900, 100)");
+        boyScale.attr("transform", "translate(-900, 0)");
 
 
         // KELLYS PART
@@ -576,6 +570,8 @@
             function (d, i) {
               return colorScale(d[1]);
             });
+
+        svg2.attr("transform", "translate(0, 200)");
 
         // KENNY'S PART
       })
