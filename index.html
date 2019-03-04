@@ -52,6 +52,13 @@
       margin-top: 200px;
     }
 
+    #vis3 {
+      display: block;
+      border: solid 2px white;
+      margin: auto;
+      margin-top: 200px;
+    }
+
     .title {
       font-size: 20px;
       color: white;
@@ -93,6 +100,11 @@
     <svg width="1000" height="700" id="vis2">
     </svg>
   </div>
+  <div class="part3">
+    <svg width="1000" height="700" id="vis3">
+    </svg>
+  </div>
+
   <script>
     var blackFridayData1;
     var blackFridayData2
@@ -715,7 +727,6 @@
           // });
         });
       })
-    })
       .catch((err) => {
         throw new Error("Something went wrong", err);
       });
