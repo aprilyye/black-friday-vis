@@ -572,6 +572,79 @@
           .style("font-size", "8");
 
         var data3_keys = Object.keys(data3)
+        console.log("data is ", data3);
+        console.log("TEST", data3[0].values[1]);
+        //Organizing array
+        let data3_046 = data3[0].values[1];
+        let data3_018 = data3[0].values[4];
+        let data3_055 = data3[0].values[3];
+        let data3_036 = data3[0].values[5];
+        let data3_051 = data3[0].values[6];
+        data3[0].values[1] = data3_018;
+        data3[0].values[3] = data3_036;
+        data3[0].values[4] = data3_046;
+        data3[0].values[5] = data3_051;
+        data3[0].values[6] = data3_055;
+
+        let data3_146 = data3[1].values[4];
+        let data3_118 = data3[1].values[3];
+        let data3_155 = data3[1].values[0];
+        let data3_136 = data3[1].values[2];
+        let data3_151 = data3[1].values[5];
+        let data3_117 = data3[1].values[6];
+        let data3_126 = data3[1].values[1];
+        data3[1].values[0] = data3_117;
+        data3[1].values[1] = data3_118;
+        data3[1].values[2] = data3_126;
+        data3[1].values[3] = data3_136;
+        data3[1].values[4] = data3_146;
+        data3[1].values[5] = data3_151;
+        data3[1].values[6] = data3_155;
+
+        let data3_246 = data3[2].values[1];
+        let data3_218 = data3[2].values[2];
+        let data3_255 = data3[2].values[5];
+        let data3_236 = data3[2].values[4];
+        let data3_251 = data3[2].values[6];
+        let data3_217 = data3[2].values[3];
+        let data3_226 = data3[2].values[0];
+        data3[2].values[0] = data3_217;
+        data3[2].values[1] = data3_218;
+        data3[2].values[2] = data3_226;
+        data3[2].values[3] = data3_236;
+        data3[2].values[4] = data3_246;
+        data3[2].values[5] = data3_251;
+        data3[2].values[6] = data3_255;
+
+        let data3_346 = data3[3].values[3];
+        let data3_318 = data3[3].values[4];
+        let data3_355 = data3[3].values[5];
+        let data3_336 = data3[3].values[2];
+        let data3_351 = data3[3].values[1];
+        let data3_317 = data3[3].values[6];
+        let data3_326 = data3[3].values[0];
+        data3[3].values[0] = data3_317;
+        data3[3].values[1] = data3_318;
+        data3[3].values[2] = data3_326;
+        data3[3].values[3] = data3_336;
+        data3[3].values[4] = data3_346;
+        data3[3].values[5] = data3_351;
+        data3[3].values[6] = data3_355;
+
+        let data3_446 = data3[4].values[4];
+        let data3_418 = data3[4].values[3];
+        let data3_455 = data3[4].values[6];
+        let data3_436 = data3[4].values[1];
+        let data3_451 = data3[4].values[2];
+        let data3_417 = data3[4].values[5];
+        let data3_426 = data3[4].values[0];
+        data3[4].values[0] = data3_417;
+        data3[4].values[1] = data3_418;
+        data3[4].values[2] = data3_426;
+        data3[4].values[3] = data3_436;
+        data3[4].values[4] = data3_446;
+        data3[4].values[5] = data3_451;
+        data3[4].values[6] = data3_455;
 
         var parsed_data3 = [];
         var keys = ["0-17", "18-25", "26-35", "36-45", "46-50", "51-55", "55+"];
@@ -581,7 +654,6 @@
           }
         });
 
-        console.log("parsed", parsed_data3);
         // Draw the bars
         let rect = svg2.append("g")
           .selectAll("bar")
@@ -634,121 +706,115 @@
             return keys[i];
           });
 
-          // KENNY'S PART
-
-          // create SVG
-          let svg3 = d3.select("#vis3");
-          let width3 = svg3.attr("width");
-          let height3 = svg3.attr("height");
-          let margin3 = { top: 50, right: 50, bottom: 50, left: 50 };
-          let chartWidth3 = width3 - margin3.left - margin3.right;
-          let chartHeight3 = height3 - margin3.top - margin3.bottom;
-
-          // draw Title
-          svg3.append("text")
+        // KENNY'S PART
+        // create SVG
+        let svg3 = d3.select("#vis3");
+        let width3 = svg3.attr("width");
+        let height3 = svg3.attr("height");
+        let margin3 = { top: 50, right: 50, bottom: 50, left: 50 };
+        let chartWidth3 = width3 - margin3.left - margin3.right;
+        let chartHeight3 = height3 - margin3.top - margin3.bottom;
+        // draw Title
+        svg3.append("text")
           .attr("x", 120)
           .attr("y", 30)
           .attr("class", "title")
           .text("Household Income, Likelihood of Sales Purchase Regret, Amount Spent per Purchase")
           .style("fill", "white");
-
-          // Maxes and Scales
-          // x-max : income
-          // x-scale : income
-          let incomeScale = d3.scaleBand()
+        // Maxes and Scales
+        // x-max : income
+        // x-scale : income
+        let incomeScale = d3.scaleBand()
           .domain(["$0 to $25,000", "$25,000 to $50,000", "$50,000 to $75,000", "$75,000 to $100,000", "$100,000 to $150,000", "$150,000 to $300,000", "$300,000+"])
           .rangeRound([20, chartWidth3])
           .paddingInner(0.1);
-          // y-max : amountSpent
-          let amountSpentMax = d3.max(blackFridayData2, function (d) {
-            return Math.max(d['amount_per_purchase']);
-          });
-          // y-scale : amountSpent
-          let amountSpentScale = d3.scaleLinear()
+        // y-max : amountSpent
+        let amountSpentMax = d3.max(blackFridayData2, function (d) {
+          return Math.max(d['amount_per_purchase']);
+        });
+        // y-scale : amountSpent
+        let amountSpentScale = d3.scaleLinear()
           .domain([0, 3110.0])
           .range([chartHeight3, 0]);
-          // y-max : percentRegret
-          let percentRegretMax = d3.max(blackFridayData2, function (d) {
-            return Math.max(d['percent_purchase_regret']);
-          });
-          // y-scale : percentRegret
-          let percentRegretScale = d3.scaleLinear()
+        // y-max : percentRegret
+        let percentRegretMax = d3.max(blackFridayData2, function (d) {
+          return Math.max(d['percent_purchase_regret']);
+        });
+        // y-scale : percentRegret
+        let percentRegretScale = d3.scaleLinear()
           .domain([0, 1.0])
           .range([chartHeight3, 0]);
-
-          // Axes
-          // x-axis : income
-          let incomeAxis = d3.axisBottom()
+        // Axes
+        // x-axis : income
+        let incomeAxis = d3.axisBottom()
           .scale(incomeScale);
-          // y-axis : amountSpent
-          let amountSpentAxis = d3.axisLeft()
+        // y-axis : amountSpent
+        let amountSpentAxis = d3.axisLeft()
           .ticks(6, d3.format("$s"))
           .scale(amountSpentScale);
-          // // y-axis : percentRegret
-          // let percentRegretAxis = d3.axisRight()
-          //   .ticks(10, d3.format("s"))
-          //   .scale(percentRegret);
-          // draw incomeAxis
-          svg3.append("g")
+        // // y-axis : percentRegret
+        // let percentRegretAxis = d3.axisRight()
+        //   .ticks(10, d3.format("s"))
+        //   .scale(percentRegret);
+        // draw incomeAxis
+        svg3.append("g")
           .attr("transform", "translate(" + margin3.left + "," + (margin3.top + chartHeight3) + ")")
           .call(incomeAxis)
           .style("font-size", "8");
-          // draw amountSpentAxis
-          svg3.append("g")
+        // draw amountSpentAxis
+        svg3.append("g")
           .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")")
           .call(amountSpentAxis)
           .style("font-size", "8");
-          // // draw percentRegretAxis
-          // svg3.append("g")
-          //   .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")")
-          //   .call(percentRegretAxis)
-          //   .style("font-size", "8");
+        // // draw percentRegretAxis
+        // svg3.append("g")
+        //   .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")")
+        //   .call(percentRegretAxis)
+        //   .style("font-size", "8");
 
-          // draw bars
-          blackFridayData2.forEach(function (d, i) {
-            let tempX = incomeScale(blackFridayData2[i].household_income);
-            let tempY = amountSpentScale(parseFloat(blackFridayData2[i].amount_per_purchase));
-            let tempWidth = incomeScale.bandwidth();
-            let tempHeight = chartHeight3 - tempY;
-            let tempPercent = parseFloat(blackFridayData2[i].percent_purchase_regret);
-            let newHeight = tempHeight * tempPercent;
-            let newY = chartHeight3 - newHeight;
-            console.log("tempPercent",tempPercent);
+        // draw bars
+        blackFridayData2.forEach(function (d, i) {
+          let tempX = incomeScale(blackFridayData2[i].household_income);
+          let tempY = amountSpentScale(parseFloat(blackFridayData2[i].amount_per_purchase));
+          let tempWidth = incomeScale.bandwidth();
+          let tempHeight = chartHeight3 - tempY;
+          let tempPercent = parseFloat(blackFridayData2[i].percent_purchase_regret);
+          let newHeight = tempHeight * tempPercent;
+          let newY = chartHeight3 - newHeight;
+          console.log("tempPercent", tempPercent);
+          svg3.append("rect")
+            .attr("x", tempX)
+            .attr("y", tempY)
+            .attr("width", tempWidth)
+            .attr("height", tempHeight)
+            .attr("transform", "translate(50,50)")
+            .style("fill", "rgba(255," + ((1 - tempPercent) * 255) + ",0)")
+          // svg3.append("rect")
+          //   .attr("x", tempX)
+          //   .attr("y", chartHeight3 - newHeight)
+          //   .attr("width", tempWidth)
+          //   .attr("height", newHeight)
+          //   .attr("transform", "translate(50,50)")
+          //   .style("fill", "#888888")
+          // draw legend
+          for (i = 0; i <= 5; i++) {
             svg3.append("rect")
-              .attr("x", tempX)
-              .attr("y", tempY)
-              .attr("width", tempWidth)
-              .attr("height", tempHeight)
-              .attr("transform", "translate(50,50)")
-              .style("fill", "rgba(255," + ((1 - tempPercent) * 255) + ",0)")
-            // svg3.append("rect")
-            //   .attr("x", tempX)
-            //   .attr("y", chartHeight3 - newHeight)
-            //   .attr("width", tempWidth)
-            //   .attr("height", newHeight)
-            //   .attr("transform", "translate(50,50)")
-            //   .style("fill", "#888888")
-
-            // draw legend
-
-            for (i = 0; i <= 5; i++) {
-              svg3.append("rect")
-                .attr("x", width3 - 30)
-                .attr("y", i * 25 + 60)
-                .attr("width", 20)
-                .attr("height", 20)
-                .attr("fill", "rgba(255," + ((1-(i/5)) * 255) + ",0)");
-              svg3.append("text")
-                .attr("x", width3 - 40)
-                .attr("y", i * 25 + 75)
-                .attr("class", "label")
-                .attr("fill", "white")
-                .attr("text-anchor", "end")
-                .text(i/5 * 100 + "%");
-            }
-          });
+              .attr("x", width3 - 30)
+              .attr("y", i * 25 + 60)
+              .attr("width", 20)
+              .attr("height", 20)
+              .attr("fill", "rgba(255," + ((1 - (i / 5)) * 255) + ",0)");
+            svg3.append("text")
+              .attr("x", width3 - 40)
+              .attr("y", i * 25 + 75)
+              .attr("class", "label")
+              .attr("fill", "white")
+              .attr("text-anchor", "end")
+              .text(i / 5 * 100 + "%");
+          }
         });
-      })
+      });
+    })
       .catch((err) => {
         throw new Error("Something went wrong", err);
       });
