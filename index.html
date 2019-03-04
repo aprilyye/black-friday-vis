@@ -713,20 +713,39 @@
             let tempPercent = parseFloat(blackFridayData2[i].percent_purchase_regret);
             let newHeight = tempHeight * tempPercent;
             let newY = chartHeight3 - newHeight;
+            console.log("tempPercent",tempPercent);
             svg3.append("rect")
               .attr("x", tempX)
               .attr("y", tempY)
               .attr("width", tempWidth)
               .attr("height", tempHeight)
               .attr("transform", "translate(50,50)")
-              .style("fill", "#ffffff")
-            svg3.append("rect")
-              .attr("x", tempX)
-              .attr("y", chartHeight3 - newHeight)
-              .attr("width", tempWidth)
-              .attr("height", newHeight)
-              .attr("transform", "translate(50,50)")
-              .style("fill", "#888888")
+              .style("fill", "rgba(255," + ((1 - tempPercent) * 255) + ",0)")
+            // svg3.append("rect")
+            //   .attr("x", tempX)
+            //   .attr("y", chartHeight3 - newHeight)
+            //   .attr("width", tempWidth)
+            //   .attr("height", newHeight)
+            //   .attr("transform", "translate(50,50)")
+            //   .style("fill", "#888888")
+
+            // draw legend
+
+            for (i = 0; i <= 5; i++) {
+              svg3.append("rect")
+                .attr("x", width3 - 30)
+                .attr("y", i * 25 + 60)
+                .attr("width", 20)
+                .attr("height", 20)
+                .attr("fill", "rgba(255," + ((1-(i/5)) * 255) + ",0)");
+              svg3.append("text")
+                .attr("x", width3 - 40)
+                .attr("y", i * 25 + 75)
+                .attr("class", "label")
+                .attr("fill", "white")
+                .attr("text-anchor", "end")
+                .text(i/5 * 100 + "%");
+            }
           });
         });
       })
