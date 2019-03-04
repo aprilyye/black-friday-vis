@@ -46,9 +46,9 @@
 
     #vis2 {
       display: block;
-      border: solid 3px gray;
+      border: solid 2px white;
       margin: auto;
-      margin-top: -50px;
+      margin-top: 200px;
     }
 
     .title {
@@ -332,8 +332,8 @@
             .attr("dy", (-110 + lastY + 10))
             .attr("font-size", 12)
             .attr("font-weight", "bold")
-            .style("fill", function() { return i <= 2 ? "white" : "black"; })
-            .text((girlColorPercentages[i].percent*100).toFixed(0)+"%")
+            .style("fill", function () { return i <= 2 ? "white" : "black"; })
+            .text((girlColorPercentages[i].percent * 100).toFixed(0) + "%")
 
           gScale.append("text")
             .attr("dx", 100)
@@ -445,7 +445,7 @@
         var boyColorPercentages = {
           0: { color: "#002db3", group: "Ages <17", percent: m0to17Percent },
           1: { color: "#0039e6", group: "Ages 18-25", percent: m18to25Percent },
-          2: { color: "#1a53ff", group: "Ages 26-35",  percent: m26to35Percent},
+          2: { color: "#1a53ff", group: "Ages 26-35", percent: m26to35Percent },
           3: { color: "#4d79ff", group: "Ages 36-45", percent: m36to45Percent },
           4: { color: "#668cff", group: "Ages 46-50", percent: m46to50Percent },
           5: { color: "#99b3ff", group: "Ages 51-54", percent: m51to55Percent },
@@ -471,13 +471,13 @@
             .attr("dy", (-110 + lastY2 + 10))
             .attr("font-size", 12)
             .attr("font-weight", "bold")
-            .style("fill", function() { return i <= 2 ? "white" : "black"; })
-            .text((boyColorPercentages[i].percent*100).toFixed(0)+"%")
+            .style("fill", function () { return i <= 2 ? "white" : "black"; })
+            .text((boyColorPercentages[i].percent * 100).toFixed(0) + "%")
 
           // special case if first text label to avoid cluttering
           bScale.append("text")
             .attr("dx", 5)
-            .attr("dy", function() {return i == 1 ? (-110 + lastY2 + 15) : (-110 + lastY2 + 12); })
+            .attr("dy", function () { return i == 1 ? (-110 + lastY2 + 15) : (-110 + lastY2 + 12); })
             .attr("font-size", 18)
             .style("fill", "white")
             .text(boyColorPercentages[i].group)
@@ -569,11 +569,12 @@
         });
 
         console.log("parsed", parsed_data3);
-
+        // Draw the bars
         let rect = svg2.append("g")
           .selectAll("bar")
           .data(parsed_data3)
-          .enter().append("rect")
+          .enter()
+          .append("rect")
           .attr("transform", function (d) { return "translate(50 ,50)"; })
           .attr("x", function (d) {
             return ageGroupScale(d[1]) + yearScale(d[0]);
@@ -590,7 +591,35 @@
               return colorScale(d[1]);
             });
 
-        svg2.attr("transform", "translate(0, 200)");
+        // Make the legend
+        var legend = svg2.selectAll(".legend")
+          .data(keys.reverse())
+          .enter()
+          .append("g")
+          .attr("transform", function (d, i) { return "translate(0," + i * 10 + ")"; });
+
+        legend.append("rect")
+          .attr("fill", function (d) {
+            return colorScale(d[1]);
+          })
+          .attr("width", 20)
+          .attr("height", 20)
+          .attr("y", function (d, i) {
+            return i * 15 + 60;
+          })
+          .attr("x", width2 - 30);
+
+        legend.append("text")
+          .attr("class", "label")
+          .attr("fill", "white")
+          .attr("y", function (d, i) {
+            return i * 15 + 75;
+          })
+          .attr("x", width2 - 40)
+          .attr("text-anchor", "end")
+          .text(function (d, i) {
+            return keys[i];
+          });
 
         // KENNY'S PART
       })
