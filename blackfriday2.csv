@@ -1,5 +1,5 @@
-﻿house_income,chance_regret_purchase,amount_spent_per_purchase
-"$0 to $25,000",0.41,$192.21 
+﻿household_income,percent_purchase_regret,amount_per_purchase
+"$0 to $25,000",0.41,192.21
 "$25,000 to $50,000",0.46,656.07
 "$50,000 to $75,000",0.52,564.6
 "$75,000 to $100,000",0.57,1452.36

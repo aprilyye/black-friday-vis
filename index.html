@@ -25,6 +25,12 @@
       margin-top: 5px;
     }
 
+    #svgHeader {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 150px;
+    }
+
     div {
       margin: 30px;
     }
@@ -40,9 +46,9 @@
 
     #vis2 {
       display: block;
-      border: solid 2px black;
+      border: solid 2px white;
       margin: auto;
-      margin-top: -50px;
+      margin-top: 200px;
     }
 
     .title {
@@ -61,31 +67,27 @@
     groups and genders by analyzing the amount spent on purchases on this popular
     shopping day in the United States.
   </div>
-  <p>
-    <!-- girl svg -->
-    <svg width="400px" height="536px" viewBox="0 0 156 268" id="pplgirl">
-      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      </g>
-    </svg>
-    <!-- girl scale -->
-    <svg width="190px" height="610px" viewBox="0 0 220 268" id="gScale">
-      <g stroke="none" stroke-width="1" fill="none">
-      </g>
-    </svg>
-    <!-- guy svg -->
-    <svg width="400px" height="536px" viewBox="0 0 156 258" id="pplboy">
-      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      </g>
-    </svg>
-    <!-- guy scale -->
-    <svg width="190px" height="610px" viewBox="0 0 220 268" id="bScale">
-      <g stroke="none" stroke-width="1" fill="none">
-      </g>
-    </svg>
-    <svg width="1500" height="500" id="vis1">
-
-    </svg>
-  </p>
+  <p id="svgHeader">Percentage of Consumers per Age Group for Males and Females</p>
+  <!-- girl svg -->
+  <svg width="400px" height="536px" viewBox="0 0 156 268" id="pplgirl">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    </g>
+  </svg>
+  <!-- girl scale -->
+  <svg width="190px" height="610px" viewBox="0 0 220 268" id="gScale">
+    <g stroke="none" stroke-width="1" fill="none">
+    </g>
+  </svg>
+  <!-- guy svg -->
+  <svg width="400px" height="536px" viewBox="0 0 156 258" id="pplboy">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    </g>
+  </svg>
+  <!-- guy scale -->
+  <svg width="190px" height="610px" viewBox="0 0 220 268" id="bScale">
+    <g stroke="none" stroke-width="1" fill="none">
+    </g>
+  </svg>
   <div>
     <svg width="1000" height="700" id="vis2">
     </svg>
@@ -197,14 +199,6 @@
         console.log("males55 =", m55andup, m55andupPercent, m55andupPurchase);
 
         // APRILS PART
-        // svg backbone
-        let svg = d3.select("#vis1");
-        let width = svg.attr("width");
-        let height = svg.attr("height");
-        let margin = { top: 50, right: 50, bottom: 50, left: 50 };
-        let chartWidth = width - margin.left - margin.right;
-        let chartHeight = height - margin.top - margin.bottom;
-
         let svgGirl = d3.select("#pplgirl");
         var g2 = svgGirl.append("g");
         var girlColor = "#ffe6e6";
@@ -292,7 +286,7 @@
           .attr("d", bodyLine(hairData)) // uses same curve basis as body
           .style("fill", "#ff9999");
 
-        svgGirl.attr("transform", "translate(700, 100)");
+        svgGirl.attr("transform", "translate(700, 0)");
 
         // female rectangle bar
         let girlScale = d3.select("#gScale");
@@ -310,13 +304,13 @@
         ];
 
         var girlColorPercentages = {
-          0: { color: "#990000", group: "Ages <17" },
-          1: { color: "#cc0000", group: "Ages 18-25" },
-          2: { color: "#ff1a1a", group: "Ages 26-35" },
-          3: { color: "#ff4d4d", group: "Ages 36-45" },
-          4: { color: "#ff8080", group: "Ages 46-50" },
-          5: { color: "#ffb3b3", group: "Ages 51-54" },
-          6: { color: "#ffe6e6", group: "Ages 55+" }
+          0: { color: "#990000", group: "Ages <17", percent: f0to17Percent },
+          1: { color: "#cc0000", group: "Ages 18-25", percent: f18to25Percent },
+          2: { color: "#ff1a1a", group: "Ages 26-35", percent: f26to35Percent },
+          3: { color: "#ff4d4d", group: "Ages 36-45", percent: f36to45Percent },
+          4: { color: "#ff8080", group: "Ages 46-50", percent: f46to50Percent },
+          5: { color: "#ffb3b3", group: "Ages 51-54", percent: f51to55Percent },
+          6: { color: "#ffe6e6", group: "Ages 55+", percent: f55andupPercent }
         };
 
         var fScale = d3.scaleLinear()
@@ -332,9 +326,18 @@
             .attr("height", fScale(d))
             .style("fill", girlColorPercentages[i].color)
 
+          // add white text on darker bg and black text on lighter bg
+          gScale.append("text")
+            .attr("dx", 43)
+            .attr("dy", (-110 + lastY + 10))
+            .attr("font-size", 12)
+            .attr("font-weight", "bold")
+            .style("fill", function () { return i <= 2 ? "white" : "black"; })
+            .text((girlColorPercentages[i].percent * 100).toFixed(0) + "%")
+
           gScale.append("text")
             .attr("dx", 100)
-            .attr("dy", (-110 + lastY + 10))
+            .attr("dy", (-110 + lastY + 12))
             .attr("font-size", 18)
             .style("fill", "white")
             .text(girlColorPercentages[i].group)
@@ -342,7 +345,7 @@
           lastY += fScale(d);
         });
 
-        girlScale.attr("transform", "translate(750, 100)");
+        girlScale.attr("transform", "translate(750, 0)");
 
         // drawing svg boy
         let svgBoy = d3.select("#pplboy");
@@ -428,7 +431,7 @@
           .attr("transform", "translate(-189.000000, -386.000000)")
           .style("fill", "#99c2ff");
 
-        svgBoy.attr("transform", "translate(-285, 100)");
+        svgBoy.attr("transform", "translate(-285, 0)");
 
         // male rectangle bar
         let boyScale = d3.select("#bScale");
@@ -440,13 +443,13 @@
         ];
 
         var boyColorPercentages = {
-          0: { color: "#002db3", group: "Ages <17" },
-          1: { color: "#0039e6", group: "Ages 18-25" },
-          2: { color: "#1a53ff", group: "Ages 26-35" },
-          3: { color: "#4d79ff", group: "Ages 36-45" },
-          4: { color: "#668cff", group: "Ages 46-50" },
-          5: { color: "#99b3ff", group: "Ages 51-54" },
-          6: { color: "#ccd9ff", group: "Ages 55+" }
+          0: { color: "#002db3", group: "Ages <17", percent: m0to17Percent },
+          1: { color: "#0039e6", group: "Ages 18-25", percent: m18to25Percent },
+          2: { color: "#1a53ff", group: "Ages 26-35", percent: m26to35Percent },
+          3: { color: "#4d79ff", group: "Ages 36-45", percent: m36to45Percent },
+          4: { color: "#668cff", group: "Ages 46-50", percent: m46to50Percent },
+          5: { color: "#99b3ff", group: "Ages 51-54", percent: m51to55Percent },
+          6: { color: "#ccd9ff", group: "Ages 55+", percent: m55andupPercent }
         };
 
         var mScale = d3.scaleLinear()
@@ -462,9 +465,19 @@
             .attr("height", mScale(d))
             .style("fill", boyColorPercentages[i].color)
 
+          // write percentages as white text on darker bg and black on lighter bg
+          bScale.append("text")
+            .attr("dx", 143)
+            .attr("dy", (-110 + lastY2 + 10))
+            .attr("font-size", 12)
+            .attr("font-weight", "bold")
+            .style("fill", function () { return i <= 2 ? "white" : "black"; })
+            .text((boyColorPercentages[i].percent * 100).toFixed(0) + "%")
+
+          // special case if first text label to avoid cluttering
           bScale.append("text")
             .attr("dx", 5)
-            .attr("dy", (-110 + lastY2 + 10))
+            .attr("dy", function () { return i == 1 ? (-110 + lastY2 + 15) : (-110 + lastY2 + 12); })
             .attr("font-size", 18)
             .style("fill", "white")
             .text(boyColorPercentages[i].group)
@@ -472,7 +485,7 @@
           lastY2 += mScale(d);
         });
 
-        boyScale.attr("transform", "translate(-900, 100)");
+        boyScale.attr("transform", "translate(-900, 0)");
 
 
         // KELLYS PART
@@ -556,11 +569,12 @@
         });
 
         console.log("parsed", parsed_data3);
-
+        // Draw the bars
         let rect = svg2.append("g")
           .selectAll("bar")
           .data(parsed_data3)
-          .enter().append("rect")
+          .enter()
+          .append("rect")
           .attr("transform", function (d) { return "translate(50 ,50)"; })
           .attr("x", function (d) {
             return ageGroupScale(d[1]) + yearScale(d[0]);
@@ -576,6 +590,36 @@
             function (d, i) {
               return colorScale(d[1]);
             });
+
+        // Make the legend
+        var legend = svg2.selectAll(".legend")
+          .data(keys.reverse())
+          .enter()
+          .append("g")
+          .attr("transform", function (d, i) { return "translate(0," + i * 10 + ")"; });
+
+        legend.append("rect")
+          .attr("fill", function (d) {
+            return colorScale(d[1]);
+          })
+          .attr("width", 20)
+          .attr("height", 20)
+          .attr("y", function (d, i) {
+            return i * 15 + 60;
+          })
+          .attr("x", width2 - 30);
+
+        legend.append("text")
+          .attr("class", "label")
+          .attr("fill", "white")
+          .attr("y", function (d, i) {
+            return i * 15 + 75;
+          })
+          .attr("x", width2 - 40)
+          .attr("text-anchor", "end")
+          .text(function (d, i) {
+            return keys[i];
+          });
 
         // KENNY'S PART
       })
