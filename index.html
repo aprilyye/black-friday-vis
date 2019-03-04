@@ -571,10 +571,27 @@
           .call(yAxis)
           .style("font-size", "8");
 
-        var data3_keys = Object.keys(data3)
-        console.log("data is ", data3);
-        console.log("TEST", data3[0].values[1]);
+        //Labels
+        svg2.append("text")
+          .text("+")
+          .attr("x", 870)
+          .attr("y", 665)
+          .attr("fill", "white")
+          .style("font-size", 8);
+        svg2.append("text")
+          .text("Total Amount Spent on Purchases")
+          .attr("x", 55)
+          .attr("y", 60)
+          .attr("fill", "white")
+          .style("font-size", 10);
+        svg2.append("text")
+          .text("Years Lived in City")
+          .attr("x", 900)
+          .attr("y", 665)
+          .attr("fill", "white")
+          .style("font-size", 10);
         //Organizing array
+        var data3_keys = Object.keys(data3);
         let data3_046 = data3[0].values[1];
         let data3_018 = data3[0].values[4];
         let data3_055 = data3[0].values[3];
@@ -705,6 +722,13 @@
           .text(function (d, i) {
             return keys[i];
           });
+
+        svg2.append("text")
+          .text("Age Groups")
+          .attr("x", width2 - 80)
+          .attr("y", 50)
+          .attr("fill", "white")
+
 
         // KENNY'S PART
         // create SVG
