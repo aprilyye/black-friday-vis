@@ -704,101 +704,30 @@
           //   .call(percentRegretAxis)
           //   .style("font-size", "8");
 
-          //version 1
-          // let rect2 = svg3.append("g")
-          //   .selectAll("bar")
-          //   .data(blackFridayData2)
-          //   .enter().append("rect")
-          //   .attr("transform", function (d) { return "translate(50,50)"; })
-          //   .attr("x", incomeScale(d[i].household_income))
-          //   .attr("y", amountSpentScale(parseInt(d[i].amount_per_purchase)))
-          //   .attr("width", incomeScale.bandwidth())
-          //   .attr("height", function (d) {
-          //     return chartHeight3 - amountSpentScale(parseInt(d[i].amount_per_purchase));
-          //   })
-          //   .attr("fill", "#ffffff")
-
-          //version 2
-          console.log("income 1", (blackFridayData2[1].household_income));
-          console.log("amount 1", parseFloat(blackFridayData2[1].amount_per_purchase));
-          //
-          // let rect2 = svg3.append("g")
-          //   .selectAll("bar")
-          //   .data(blackFridayData2)
-          //   .enter()
-          //   .append("rect")
-          //   .attr("transform", function (d) { return "translate(50 ,50)"; })
-          //   .attr("x", function (d, i) {
-          //     return incomeScale(d[i].household_income);
-          //   })
-          //   .attr("y", function (d, i) {
-          //     return amountSpentScale(parseFloat(d[i].amount_per_purchase));
-          //   })
-          //   .attr("width", incomeScale.bandwidth())
-          //   .attr("height", function (d, i) {
-          //     return chartHeight3 - amountSpentScale(parseFloat(d[i].amount_per_purchase));
-          //   })
-          //   .attr("fill","#ffffff");
-          //
-          //
-          // blackFridayData2.forEach(function (d, i) {
-          //   svg3.append("rect")
-          //     .attr("x", incomeScale(d[i].household_income) + 50)
-          //     .attr("y", amountSpentScale(parseFloat(d[i].amount_per_purchase)) + 50)
-          //     .attr("width", incomeScale.bandwidth())
-          //     .attr("height", (chartHeight3 - amountSpentScale(parseFloat(d[i].amount_per_purchase))))
-          //     .style("fill", "#ffffff")
-          // });
-          // blackFridayData2.forEach(function (d, i) {
-          //   svg3.append("rect")
-          //     .attr("x", incomeScale(d[i].household_income) + 50)
-          //     .attr("y", amountSpentScale(parseFloat(d[i].amount_per_purchase)) + 50)
-          //     .attr("width", incomeScale.bandwidth())
-          //     .attr("height", (chartHeight3 - amountSpentScale(parseFloat(d[i].amount_per_purchase))))
-          //     .style("fill", "#ffffff")
-          // });
-          svg3.append("rect")
-            .attr("x", incomeScale(blackFridayData2[0].household_income) + 50)
-            .attr("y", amountSpentScale(parseFloat(blackFridayData2[0].amount_per_purchase)) + 50)
-            .attr("width", incomeScale.bandwidth())
-            .attr("height", (chartHeight3 - amountSpentScale(parseFloat(blackFridayData2[0].amount_per_purchase))))
-            .style("fill", "#ffffff")
-          svg3.append("rect")
-            .attr("x", incomeScale(blackFridayData2[1].household_income) + 50)
-            .attr("y", amountSpentScale(parseFloat(blackFridayData2[1].amount_per_purchase)) + 50)
-            .attr("width", incomeScale.bandwidth())
-            .attr("height", (chartHeight3 - amountSpentScale(parseFloat(blackFridayData2[1].amount_per_purchase))))
-            .style("fill", "#ffffff")
-          svg3.append("rect")
-            .attr("x", incomeScale(blackFridayData2[2].household_income) + 50)
-            .attr("y", amountSpentScale(parseFloat(blackFridayData2[2].amount_per_purchase)) + 50)
-            .attr("width", incomeScale.bandwidth())
-            .attr("height", (chartHeight3 - amountSpentScale(parseFloat(blackFridayData2[2].amount_per_purchase))))
-            .style("fill", "#ffffff")
-          svg3.append("rect")
-            .attr("x", incomeScale(blackFridayData2[3].household_income) + 50)
-            .attr("y", amountSpentScale(parseFloat(blackFridayData2[3].amount_per_purchase)) + 50)
-            .attr("width", incomeScale.bandwidth())
-            .attr("height", (chartHeight3 - amountSpentScale(parseFloat(blackFridayData2[3].amount_per_purchase))))
-            .style("fill", "#ffffff")
-          svg3.append("rect")
-            .attr("x", incomeScale(blackFridayData2[4].household_income) + 50)
-            .attr("y", amountSpentScale(parseFloat(blackFridayData2[4].amount_per_purchase)) + 50)
-            .attr("width", incomeScale.bandwidth())
-            .attr("height", (chartHeight3 - amountSpentScale(parseFloat(blackFridayData2[4].amount_per_purchase))))
-            .style("fill", "#ffffff")
-          svg3.append("rect")
-            .attr("x", incomeScale(blackFridayData2[5].household_income) + 50)
-            .attr("y", amountSpentScale(parseFloat(blackFridayData2[5].amount_per_purchase)) + 50)
-            .attr("width", incomeScale.bandwidth())
-            .attr("height", (chartHeight3 - amountSpentScale(parseFloat(blackFridayData2[5].amount_per_purchase))))
-            .style("fill", "#ffffff")
-          svg3.append("rect")
-            .attr("x", incomeScale(blackFridayData2[6].household_income) + 50)
-            .attr("y", amountSpentScale(parseFloat(blackFridayData2[6].amount_per_purchase)) + 50)
-            .attr("width", incomeScale.bandwidth())
-            .attr("height", (chartHeight3 - amountSpentScale(parseFloat(blackFridayData2[6].amount_per_purchase))))
-            .style("fill", "#ffffff")
+          // draw bars
+          blackFridayData2.forEach(function (d, i) {
+            let tempX = incomeScale(blackFridayData2[i].household_income);
+            let tempY = amountSpentScale(parseFloat(blackFridayData2[i].amount_per_purchase));
+            let tempWidth = incomeScale.bandwidth();
+            let tempHeight = chartHeight3 - tempY;
+            let tempPercent = parseFloat(blackFridayData2[i].percent_purchase_regret);
+            let newHeight = tempHeight * tempPercent;
+            let newY = chartHeight3 - newHeight;
+            svg3.append("rect")
+              .attr("x", tempX)
+              .attr("y", tempY)
+              .attr("width", tempWidth)
+              .attr("height", tempHeight)
+              .attr("transform", "translate(50,50)")
+              .style("fill", "#ffffff")
+            svg3.append("rect")
+              .attr("x", tempX)
+              .attr("y", chartHeight3 - newHeight)
+              .attr("width", tempWidth)
+              .attr("height", newHeight)
+              .attr("transform", "translate(50,50)")
+              .style("fill", "#888888")
+          });
         });
       })
       .catch((err) => {
