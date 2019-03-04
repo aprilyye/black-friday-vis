@@ -304,13 +304,13 @@
         ];
 
         var girlColorPercentages = {
-          0: { color: "#990000", group: "Ages <17" },
-          1: { color: "#cc0000", group: "Ages 18-25" },
-          2: { color: "#ff1a1a", group: "Ages 26-35" },
-          3: { color: "#ff4d4d", group: "Ages 36-45" },
-          4: { color: "#ff8080", group: "Ages 46-50" },
-          5: { color: "#ffb3b3", group: "Ages 51-54" },
-          6: { color: "#ffe6e6", group: "Ages 55+" }
+          0: { color: "#990000", group: "Ages <17", percent: f0to17Percent },
+          1: { color: "#cc0000", group: "Ages 18-25", percent: f18to25Percent },
+          2: { color: "#ff1a1a", group: "Ages 26-35", percent: f26to35Percent },
+          3: { color: "#ff4d4d", group: "Ages 36-45", percent: f36to45Percent },
+          4: { color: "#ff8080", group: "Ages 46-50", percent: f46to50Percent },
+          5: { color: "#ffb3b3", group: "Ages 51-54", percent: f51to55Percent },
+          6: { color: "#ffe6e6", group: "Ages 55+", percent: f55andupPercent }
         };
 
         var fScale = d3.scaleLinear()
@@ -326,9 +326,18 @@
             .attr("height", fScale(d))
             .style("fill", girlColorPercentages[i].color)
 
+          // add white text on darker bg and black text on lighter bg
+          gScale.append("text")
+            .attr("dx", 43)
+            .attr("dy", (-110 + lastY + 10))
+            .attr("font-size", 12)
+            .attr("font-weight", "bold")
+            .style("fill", function() { return i <= 2 ? "white" : "black"; })
+            .text((girlColorPercentages[i].percent*100).toFixed(0)+"%")
+
           gScale.append("text")
             .attr("dx", 100)
-            .attr("dy", (-110 + lastY + 10))
+            .attr("dy", (-110 + lastY + 12))
             .attr("font-size", 18)
             .style("fill", "white")
             .text(girlColorPercentages[i].group)
@@ -434,13 +443,13 @@
         ];
 
         var boyColorPercentages = {
-          0: { color: "#002db3", group: "Ages <17" },
-          1: { color: "#0039e6", group: "Ages 18-25" },
-          2: { color: "#1a53ff", group: "Ages 26-35" },
-          3: { color: "#4d79ff", group: "Ages 36-45" },
-          4: { color: "#668cff", group: "Ages 46-50" },
-          5: { color: "#99b3ff", group: "Ages 51-54" },
-          6: { color: "#ccd9ff", group: "Ages 55+" }
+          0: { color: "#002db3", group: "Ages <17", percent: m0to17Percent },
+          1: { color: "#0039e6", group: "Ages 18-25", percent: m18to25Percent },
+          2: { color: "#1a53ff", group: "Ages 26-35",  percent: m26to35Percent},
+          3: { color: "#4d79ff", group: "Ages 36-45", percent: m36to45Percent },
+          4: { color: "#668cff", group: "Ages 46-50", percent: m46to50Percent },
+          5: { color: "#99b3ff", group: "Ages 51-54", percent: m51to55Percent },
+          6: { color: "#ccd9ff", group: "Ages 55+", percent: m55andupPercent }
         };
 
         var mScale = d3.scaleLinear()
@@ -456,9 +465,19 @@
             .attr("height", mScale(d))
             .style("fill", boyColorPercentages[i].color)
 
+          // write percentages as white text on darker bg and black on lighter bg
+          bScale.append("text")
+            .attr("dx", 143)
+            .attr("dy", (-110 + lastY2 + 10))
+            .attr("font-size", 12)
+            .attr("font-weight", "bold")
+            .style("fill", function() { console.log("i = ", i); return i <= 2 ? "white" : "black"; })
+            .text((boyColorPercentages[i].percent*100).toFixed(0)+"%")
+
+          // special case if first text label to avoid cluttering
           bScale.append("text")
             .attr("dx", 5)
-            .attr("dy", (-110 + lastY2 + 10))
+            .attr("dy", function() {return i == 1 ? (-110 + lastY2 + 15) : (-110 + lastY2 + 12); })
             .attr("font-size", 18)
             .style("fill", "white")
             .text(boyColorPercentages[i].group)
