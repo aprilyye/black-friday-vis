@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <title>April Ye (yy459), Kelly Yu (ky356), Kenny Zhou (kz68) - Project 1</title>
   <meta charset="UTF-8">
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <style>
@@ -60,7 +61,7 @@
 
 <body>
   <h1>Black Friday Consumer Trends </h1>
-  <p id="authors">April Ye (yy459), Kelly Yu (ky356), Kenny Zhou (kz68) </p>
+  <p id="authors">April Ye (yy459), Kelly Yu (ky356), Kenny Zhou (kz68) - Project 1</p>
   <div class="description">
     The visualization below illustrates the behaviors of consumers on Black Friday
     in a retail store. It compares the consumer trends between different age
@@ -621,7 +622,98 @@
             return keys[i];
           });
 
-        // KENNY'S PART
+          // KENNY'S PART
+
+          // create SVG
+          let svg3 = d3.select("#vis3");
+          let width3 = svg3.attr("width");
+          let height3 = svg3.attr("height");
+          let margin3 = { top: 50, right: 50, bottom: 50, left: 50 };
+          let chartWidth3 = width3 - margin3.left - margin3.right;
+          let chartHeight3 = height3 - margin3.top - margin3.bottom;
+
+          // draw Title
+          svg3.append("text")
+          .attr("x", 120)
+          .attr("y", 30)
+          .attr("class", "title")
+          .text("Household Income, Likelihood of Sales Purchase Regret, Amount Spent per Purchase")
+          .style("fill", "white");
+
+          // Maxes and Scales
+          // x-max : income
+          // x-scale : income
+          let incomeScale = d3.scaleBand()
+          .domain(["$0 to $25,000", "$25,000 to $50,000", "$50,000 to $75,000", "$75,000 to $100,000", "$100,000 to $150,000", "$150,000 to $300,000", "$300,000+"])
+          .rangeRound([20, chartWidth3])
+          .paddingInner(0.1);
+          // y-max : amountSpent
+          let amountSpentMax = d3.max(blackFridayData2, function (d) {
+            return Math.max(d['amount_per_purchase']);
+          });
+          // y-scale : amountSpent
+          let amountSpentScale = d3.scaleLinear()
+          .domain([0, 3110.0])
+          .range([chartHeight3, 0]);
+          // y-max : percentRegret
+          let percentRegretMax = d3.max(blackFridayData2, function (d) {
+            return Math.max(d['percent_purchase_regret']);
+          });
+          // y-scale : percentRegret
+          let percentRegretScale = d3.scaleLinear()
+          .domain([0, 1.0])
+          .range([chartHeight3, 0]);
+
+          // Axes
+          // x-axis : income
+          let incomeAxis = d3.axisBottom()
+          .scale(incomeScale);
+          // y-axis : amountSpent
+          let amountSpentAxis = d3.axisLeft()
+          .ticks(6, d3.format("$s"))
+          .scale(amountSpentScale);
+          // // y-axis : percentRegret
+          // let percentRegretAxis = d3.axisRight()
+          //   .ticks(10, d3.format("s"))
+          //   .scale(percentRegret);
+          // draw incomeAxis
+          svg3.append("g")
+          .attr("transform", "translate(" + margin3.left + "," + (margin3.top + chartHeight3) + ")")
+          .call(incomeAxis)
+          .style("font-size", "8");
+          // draw amountSpentAxis
+          svg3.append("g")
+          .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")")
+          .call(amountSpentAxis)
+          .style("font-size", "8");
+          // // draw percentRegretAxis
+          // svg3.append("g")
+          //   .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")")
+          //   .call(percentRegretAxis)
+          //   .style("font-size", "8");
+
+          let rect2 = svg3.append("g")
+            .selectAll("bar")
+            .data(blackFridayData2)
+            .enter().append("rect")
+            .attr("transform", function (d) { return "translate(50 ,50)"; })
+            .attr("x", incomeScale(d[i].household_income))
+            .attr("y", amountSpentScale(parseInt(d[i].amount_per_purchase)))
+            .attr("width", incomeScale.bandwidth())
+            .attr("height", function (d) {
+              return chartHeight3 - amountSpentScale(parseInt(d[i].amount_per_purchase));
+            })
+            .attr("fill", "#ffffff")
+
+          // blackFridayData2.forEach(function (d, i) {
+          //   svg3.append("rect")
+          //     .attr("x", incomeScale(d[i].household_income))
+          //     .attr("y", amountSpentScale(parseInt(d[i].amount_per_purchase)))
+          //     .attr("width", incomeScale.bandwidth())
+          //     .attr("height", (chartHeight3 - amountSpentScale(parseInt(d[i].amount_per_purchase))))
+          //     .style("fill", "#ffffff")
+          // });
+        });
       })
     })
       .catch((err) => {
