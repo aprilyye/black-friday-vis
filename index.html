@@ -790,7 +790,6 @@
           svg3.append("g")
             .attr("transform", "translate(" + margin3.left + "," + (margin3.top + chartHeight3) + ")")
             .call(incomeAxis)
-            .style("font-size", "8");
           // draw x-axis label : income
           svg3.append("text")
             .attr("x", width3/2)
@@ -802,7 +801,6 @@
           svg3.append("g")
             .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")")
             .call(amountSpentAxis)
-            .style("font-size", "8");
           // draw y-axis label : amountSpent
           svg3.append("text")
             .attr("transform", "rotate(-90)")
@@ -815,7 +813,6 @@
           svg3.append("g")
             .attr("transform", "translate(" + (chartWidth3 + margin3.right) + "," + margin3.top + ")")
             .call(percentRegretAxis)
-            .style("font-size", "8");
           // draw y-axis label : percentRegret
           svg3.append("text")
             .attr("transform", "rotate(90)")
