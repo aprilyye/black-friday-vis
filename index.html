@@ -299,7 +299,7 @@
           .attr("d", bodyLine(hairData)) // uses same curve basis as body
           .style("fill", "#ff9999");
 
-        svgGirl.attr("transform", "translate(700, 0)");
+        svgGirl.attr("transform", "translate(950, 0)");
 
         // female rectangle bar
         let girlScale = d3.select("#gScale");
@@ -358,7 +358,7 @@
           lastY += fScale(d);
         });
 
-        girlScale.attr("transform", "translate(750, 0)");
+        girlScale.attr("transform", "translate(400, 0)");
 
         // drawing svg boy
         let svgBoy = d3.select("#pplboy");
@@ -444,7 +444,7 @@
           .attr("transform", "translate(-189.000000, -386.000000)")
           .style("fill", "#99c2ff");
 
-        svgBoy.attr("transform", "translate(-285, 0)");
+        svgBoy.attr("transform", "translate(-550, 0)");
 
         // male rectangle bar
         let boyScale = d3.select("#bScale");
@@ -498,7 +498,7 @@
           lastY2 += mScale(d);
         });
 
-        boyScale.attr("transform", "translate(-900, 0)");
+        boyScale.attr("transform", "translate(-550, 0)");
 
 
         // KELLYS PART
