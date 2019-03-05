@@ -112,8 +112,6 @@
       d3.csv("blackfriday2.csv").then(function (data2) {
         blackFridayData1 = data1;
         blackFridayData2 = data2;
-        console.log("data =", blackFridayData1); // confirm data is successfully loaded
-        console.log("data2=", blackFridayData2);
         var females = males = 0;
         // females age group counters initialized
         var f0to17 = f18to25 = f26to35 = f36to45 = f46to50 = f51to55 = f55andup = 0;
@@ -191,25 +189,6 @@
         var m46to50Percent = (m46to50 / males).toFixed(2);
         var m51to55Percent = (m51to55 / males).toFixed(2);
         var m55andupPercent = (m55andup / males).toFixed(2);
-
-        // outputting results
-        console.log("females =", females);
-        console.log("females17 =", f0to17, f0to17Percent, f0to17Purchase);
-        console.log("females18 =", f18to25, f18to25Percent, f18to25Purchase);
-        console.log("females26 =", f26to35, f26to35Percent, f26to35Purchase);
-        console.log("females36 =", f36to45, f36to45Percent, f36to45Purchase);
-        console.log("females46 =", f46to50, f46to50Percent, f46to50Purchase);
-        console.log("females51 =", f51to55, f51to55Percent, f51to55Purchase);
-        console.log("females55 =", f55andup, f55andupPercent, f55andupPurchase);
-
-        console.log("males =", males);
-        console.log("males17 =", m0to17, m0to17Percent, m0to17Purchase);
-        console.log("males18 =", m18to25, m18to25Percent, m18to25Purchase);
-        console.log("males26 =", m26to35, m26to35Percent, m26to35Purchase);
-        console.log("males36 =", m36to45, m36to45Percent, m36to45Purchase);
-        console.log("males46 =", m46to50, m46to50Percent, m46to50Purchase);
-        console.log("males51 =", m51to55, m51to55Percent, m51to55Purchase);
-        console.log("males55 =", m55andup, m55andupPercent, m55andupPurchase);
 
         // APRILS PART
         let svgGirl = d3.select("#pplgirl");
