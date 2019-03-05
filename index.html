@@ -733,45 +733,31 @@
           ////////////////
           // KENNY'S PART
           ////////////////
-          // create SVG
+
+          /*
+          Base
+          */
+
+          // draw SVG
           let svg3 = d3.select("#vis3");
           let width3 = svg3.attr("width");
           let height3 = svg3.attr("height");
           let margin3 = { top: 75, right: 75, bottom: 75, left: 75 };
           let chartWidth3 = width3 - margin3.left - margin3.right;
           let chartHeight3 = height3 - margin3.top - margin3.bottom;
-          // draw Title
+          // draw title
           svg3.append("text")
             .attr("x", width3/2)
             .attr("y", margin3.top/2)
-            .style("text-anchor", "middle")
             .text("Household Income, Likelihood of Sales Purchase Regret, Amount Spent per Purchase")
+            .style("text-anchor", "middle")
             .style("fill", "white")
             .style("font-size", "20px");
-          svg3.append("text")
-            .attr("x", width3/2)
-            .attr("y", (height3 - margin3.top/3))
-            .style("text-anchor", "middle")
-            .text("Household Income (in brackets)")
-            .style("fill", "white");
-          svg3.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("x", -height3/2)
-            .attr("y", margin3.top/3)
-            .style("text-anchor", "middle")
-            .text("Amount Spent per Purchase (in thousands of dollars)")
-            .style("fill", "white");
-          svg3.append("text")
-            .attr("transform", "rotate(90)")
-            .attr("x", height3/2)
-            .attr("y", (-width3 + margin3.top/3))
-            .style("text-anchor", "middle")
-            .text("Percent of Purchase Regret (out of 1.0)")
-            .style("fill", "white");
-          ////////////////
-          // Maxes and Scales
-          ////////////////
-          // x-max : income
+
+          /*
+          Axes
+          */
+
           // x-scale : income
           let incomeScale = d3.scaleBand()
             .domain(["$0 to $25,000", "$25,000 to $50,000", "$50,000 to $75,000", "$75,000 to $100,000", "$100,000 to $150,000", "$150,000 to $300,000", "$300,000+"])
@@ -785,15 +771,10 @@
           let amountSpentScale = d3.scaleLinear()
             .domain([0, amountSpentMax])
             .range([chartHeight3, 0]);
-          // y-max : percentRegret
-          let percentRegretMax = d3.max(blackFridayData2, function (d) {
-            return Math.max(d['percent_purchase_regret']);
-          });
           // y-scale : percentRegret
           let percentRegretScale = d3.scaleLinear()
             .domain([0, 1.0])
             .range([chartHeight3, 0]);
-          // Axes
           // x-axis : income
           let incomeAxis = d3.axisBottom()
             .scale(incomeScale);
@@ -803,65 +784,99 @@
             .scale(amountSpentScale);
           // y-axis : percentRegret
           let percentRegretAxis = d3.axisRight()
-            .ticks(10, d3.format("s"))
+            .ticks(10, d3.format("1%"))
             .scale(percentRegretScale);
-          // draw incomeAxis
+          // draw x-axis : income
           svg3.append("g")
             .attr("transform", "translate(" + margin3.left + "," + (margin3.top + chartHeight3) + ")")
             .call(incomeAxis)
             .style("font-size", "8");
-          // draw amountSpentAxis
+          // draw x-axis label : income
+          svg3.append("text")
+            .attr("x", width3/2)
+            .attr("y", (height3 - margin3.top/3))
+            .text("Household Income (grouped in brackets)")
+            .style("text-anchor", "middle")
+            .style("fill", "white");
+          // draw y-axis : amountSpent
           svg3.append("g")
             .attr("transform", "translate(" + margin3.left + "," + margin3.top + ")")
             .call(amountSpentAxis)
             .style("font-size", "8");
-          // draw percentRegretAxis
+          // draw y-axis label : amountSpent
+          svg3.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -height3/2)
+            .attr("y", margin3.top/3)
+            .text("Amount Spent per Purchase (in dollars)")
+            .style("text-anchor", "middle")
+            .style("fill", "white");
+          // draw y-axis : percentRegret
           svg3.append("g")
             .attr("transform", "translate(" + (chartWidth3 + margin3.right) + "," + margin3.top + ")")
             .call(percentRegretAxis)
             .style("font-size", "8");
+          // draw y-axis label : percentRegret
+          svg3.append("text")
+            .attr("transform", "rotate(90)")
+            .attr("x", height3/2)
+            .attr("y", (-width3 + margin3.top/3))
+            .text("Likelihood of Purchase Regret (in percent)")
+            .style("text-anchor", "middle")
+            .style("fill", "white");
 
-          // draw bars
+          /*
+          Data
+          */
+
+          // loop through data
           blackFridayData2.forEach(function (d, i) {
-            //.curve(d3.curveMonotoneX)
-            let tempX = incomeScale(blackFridayData2[i].household_income);
-            let tempY = amountSpentScale(parseFloat(blackFridayData2[i].amount_per_purchase));
-            let tempWidth = incomeScale.bandwidth();
-            let tempHeight = chartHeight3 - tempY;
-            let tempPercent = parseFloat(blackFridayData2[i].percent_purchase_regret);
-            let newHeight = tempHeight * tempPercent;
-
-            let nextY = chartHeight3 - newHeight;
-            let tempValue = (incomeScale.bandwidth()/2);
-
+            let currX = incomeScale(blackFridayData2[i].household_income);
+            let currYValue = parseFloat(blackFridayData2[i].amount_per_purchase);
+            let currY = amountSpentScale(currYValue);
+            let currWidth = incomeScale.bandwidth();
+            let currHeight = chartHeight3 - currY;
+            let currPointX = currX + currWidth/2;
+            let currPointYValue = parseFloat(blackFridayData2[i].percent_purchase_regret);
+            let currPointY = percentRegretScale(currPointYValue);
+            // draw bars
             svg3.append("rect")
-              .attr("x", tempX)
-              .attr("y", tempY)
-              .attr("width", tempWidth)
-              .attr("height", tempHeight)
+              .attr("x", currX)
+              .attr("y", currY)
+              .attr("width", currWidth)
+              .attr("height", currHeight)
               .attr("transform", "translate(" + margin3.left + "," + margin3.top +")")
               .style("fill", "#ff7f00")
-            let pointX = percentRegretScale(blackFridayData2[i].percent_purchase_regret);
-            let pointY = percentRegretScale(blackFridayData2[i].percent_purchase_regret);
-
+            // draw labels
+            svg3.append("text")
+              .attr("x", (currX + currWidth/2))
+              .attr("y", (currY + currHeight/2))
+              .attr("transform", "translate(" + margin3.left + "," + margin3.top +")")
+              .text("$" + Math.round(currYValue) + ", " + (Math.round(currPointYValue * 100)) + "%")
+              .style("text-anchor", "middle")
+              .style("fill", "white")
+              .style("font-size", "10px");
+            // draw points
             svg3.append("circle")
               .attr("class", "points")
-              .attr("cx", tempX)
-              .attr("cy", pointY)
+              .attr("cx", currPointX)
+              .attr("cy", currPointY)
               .attr("r", 5)
-              .attr("transform", "translate(" + (margin3.left + tempValue)  + "," + margin3.top +")")
+              .attr("transform", "translate(" + margin3.left  + "," + margin3.top +")")
               .style("fill", "#ffffff");
             if (i > 0) {
-              let newX = incomeScale(blackFridayData2[i-1].household_income);
-              let newPointY = percentRegretScale(blackFridayData2[i-1].percent_purchase_regret);
+              let prevX = incomeScale(blackFridayData2[i-1].household_income);
+              let prevPointX = prevX + currWidth/2;;
+              let prevPointY = percentRegretScale(blackFridayData2[i-1].percent_purchase_regret);
+              // draw lines
               svg3.append("line")
-                .attr("x1", tempX)
-                .attr("x2", newX)
-                .attr("y1", pointY)
-                .attr("y2", newPointY)
-                .attr("stroke-width",1)
-                .attr("stroke","white")
-                .attr("transform", "translate(" + (margin3.left + tempValue) + "," + margin3.top +")")
+                .attr("x1", prevPointX)
+                .attr("x2", currPointX)
+                .attr("y1", prevPointY)
+                .attr("y2", currPointY)
+                .attr("stroke-width", 2)
+                .attr("stroke", "white")
+                .attr("transform", "translate(" + margin3.left + "," + margin3.top +")")
             }
           });
       });
