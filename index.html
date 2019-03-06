@@ -728,7 +728,7 @@
           svg3.append("text")
             .attr("x", width3/2)
             .attr("y", margin3.top/2)
-            .text("Household Income, Likelihood of Sales Purchase Regret, Amount Spent per Purchase")
+            .text("Household Income vs Amount Spent per Purchase and Likelihood of Purchase Regret")
             .style("text-anchor", "middle")
             .style("fill", "white")
             .style("font-size", "20px");
@@ -815,7 +815,7 @@
             let currPointX = currX + currWidth/2;
             let currPointYValue = parseFloat(blackFridayData2[i].percent_purchase_regret);
             let currPointY = percentRegretScale(currPointYValue);
-            // draw bars
+            // draw amountSpent bars
             svg3.append("rect")
               .attr("x", currX)
               .attr("y", currY)
@@ -823,6 +823,15 @@
               .attr("height", currHeight)
               .attr("transform", "translate(" + margin3.left + "," + margin3.top +")")
               .style("fill", "#ff7f00")
+            // // draw amountRegret bars
+            // svg3.append("rect")
+            //   .attr("x", currX)
+            //   .attr("y", (currY + currHeight * (1 - currPointYValue)))
+            //   .attr("width", currWidth)
+            //   .attr("height", currHeight * currPointYValue)
+            //   .attr("transform", "translate(" + margin3.left + "," + margin3.top +")")
+            //   .style("fill", "#888888")
+            // console.log("Regret Value", parseFloat(blackFridayData2[i].amount_per_purchase) * currPointYValue);
             // draw labels
             svg3.append("text")
               .attr("x", (currX + currWidth/2))
