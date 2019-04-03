@@ -17,3 +17,8 @@ Project submission by April Ye (yy459), Kelly Yu (ky356), Kenny Zhou (kz68)
 - Datasets
   - Black Friday - Kaggle by Mehdi Dagdoug (https://www.kaggle.com/mehdidag/black-friday)
   - Black Friday Statistics 2018 by Finder (https://www.finder.com/black-friday-statistics)
+  
+## Languages Used
+- D3.js
+- Javascript
+- HTML
