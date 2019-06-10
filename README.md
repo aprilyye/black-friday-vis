@@ -2,6 +2,8 @@
 Project submission by April Ye (yy459), Kelly Yu (ky356), Kenny Zhou (kz68)
 <!-- The visualizations in this project illustrate the behaviors of consumers on Black Friday in a retail store. It compares the consumer trends between different age groups and genders by analyzing the amount spent on purchases on this popular shopping day in the United States. -->
 
+All SVGs created from scratch.
+
 ## Overview
 To run project on localhost:8000:
 
