@@ -5,7 +5,7 @@ Project submission by April Ye (yy459), Kelly Yu (ky356), Kenny Zhou (kz68)
 All SVGs created from scratch.
 
 ## Overview
-To run project on localhost:8000:
+To run project on ```localhost:8000```:
 
 - Python 3: ```python -m http.server```
 - Python 2: ```python -m SimpleHTTPServer 8000```
