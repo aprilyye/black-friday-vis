@@ -5,8 +5,9 @@ Project submission by April Ye (yy459), Kelly Yu (ky356), Kenny Zhou (kz68)
 ## Overview
 To run project on localhost:8000:
 
-Python 3: python -m http.server
-Python 2: python -m SimpleHTTPServer 8000
+- Python 3: python -m http.server
+- Python 2: python -m SimpleHTTPServer 8000
+
 ![vis1](vis1.png)
 ![vis2and3](vis2.png)
 
